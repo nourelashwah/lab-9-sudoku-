@@ -26,7 +26,7 @@ public abstract class Checker {
     public List<String> getErrors() {
         return errors;
     }
-    public abstract void check();
+    public abstract void Check(int[][] arr);
     protected void addError(String message)
     {
     errors.add(message);
