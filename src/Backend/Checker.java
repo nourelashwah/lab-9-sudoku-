@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @author LapTop
  */
-public abstract class Check {
+public abstract class Checker {
     private SudokuBoard board;
     private List<String> errors =new ArrayList<>();
 
-    public Check(SudokuBoard board) {
+    public Checker(SudokuBoard board) {
         this.board = board;
     }
 
@@ -26,7 +26,7 @@ public abstract class Check {
     public List<String> getErrors() {
         return errors;
     }
-    public abstract void check();
+    public abstract void check(int[][] sudoku);
     protected void addError(String message)
     {
     errors.add(message);
