@@ -4,10 +4,32 @@
  */
 package Backend;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author LapTop
  */
-public class Checker {
+public abstract class Checker {
+    private SudokuBoard board;
+    private List<String> errors =new ArrayList<>();
+
+    public Checker(SudokuBoard board) {
+        this.board = board;
+    }
+
+    public SudokuBoard getBoard() {
+        return board;
+    }
+
+    public List<String> getErrors() {
+        return errors;
+    }
+    public abstract void check();
+    protected void addError(String message)
+    {
+    errors.add(message);
+    }
     
 }
