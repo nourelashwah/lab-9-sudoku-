@@ -10,43 +10,44 @@ package Backend;
  */
 public class RowChecker extends Checker {
 
+    GetterOfRCB getterfor = new GetterOfRCB();
+
     public RowChecker(SudokuBoard board) {
         super(board);
     }
 
     @Override
-    public void check() {
-        for (int i = 0; i < 9; i++) //it loops around all 9 rows 
-        {
-            checkRow(i);
-        }
-    }
+    public void check(int[][] sudoku) {
+        int[][] rows = getterfor.getterfor(sudoku, 'r');
+        for (int r = 0; r < 9; r++) {
+            int[] row = rows[r];
 
-    private void checkRow(int rowIndex)//check each indv row
-    {
-        int[] row = getBoard().getRow(rowIndex);
-        boolean[] found = new boolean[10];//3ashn ashouf which numbers where already found
-        for (int i = 0; i < row.length; i++) {
-            int num = row[i];
-            if (found[num])//law rakm mawgod ydy error message else y add en this number is seen
-            {
-                addError(formatError(rowIndex, num, row));
-            } else {
-                found[num] = true;
+            for (int c = 0; c < row.length; c++) {
+                int now = row[c];
+
+                if (now == 0) {
+                    continue;
+                }
+                for (int k = 0; k < c; k++) {
+                    if (row[k] == now) {
+                        addError(formatError(r, now, row));
+                        break;
+                    }
+                }
             }
         }
     }
 
     private String formatError(int rowindex, int dupNum, int[] row) {
-        StringBuilder errorMsg = new StringBuilder();
-        errorMsg.append("ROW ").append(rowindex + 1).append(",#").append(dupNum).append(",[");
+        String errorMsg = "Row " + (rowindex + 1) + ",#" + dupNum + ",[";
         for (int i = 0; i < row.length; i++) {
-            errorMsg.append(row[i]);
-            if (i < row.length-1) {
-                errorMsg.append(",");
+            errorMsg += row[i];
+            if (i < row.length - 1) {
+                errorMsg += ",";
             }
         }
-        errorMsg.append("]");
-        return errorMsg.toString();
+        errorMsg += "]";
+        return errorMsg;
+
     }
 }
