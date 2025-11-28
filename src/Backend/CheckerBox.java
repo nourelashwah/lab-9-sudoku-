@@ -38,11 +38,11 @@ public class CheckerBox extends Checker {
                     }
                     for(int rPrev = 0; rPrev <= row; rPrev++) {
                      for(int cPrev = 0; cPrev < 3; cPrev++) {
-                         if(rPrev == row && cPrev >= col)
+                         if(rPrev == row && cPrev >= col) //y3ne de el cell zat nfsha aw el future, ehna bn-check el previous
                         break;
                          
                          if(box1[rPrev][cPrev] == now) {
-                             addError(formatErrorBox(box, now, box1));
+                             addError(formatError(box, now, box1));
                         break;}
                      }
                     }

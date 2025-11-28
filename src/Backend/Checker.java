@@ -12,6 +12,7 @@ import java.util.List;
  * @author LapTop
  */
 public abstract class Checker {
+    
     private SudokuBoard board;
     private List<String> errors =new ArrayList<>();
 
