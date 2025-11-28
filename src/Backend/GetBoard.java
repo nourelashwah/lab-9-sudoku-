@@ -18,30 +18,45 @@ public class GetBoard {
     public void ReadData(){
     try(CSVReader r = new CSVReader(new FileReader(Pth))){
     List<String[]> all = r.readAll();
-    for(String[] row : all){
-    for(String cell : row){
-        if(cell == null || cell.isEmpty()){
-            
-             System.out.print("empty"+"\t");
-    }
-        else{
-            System.out.print(cell+"\t");
-       
-        }
     
-    }
-        System.out.println("");
-    }
-    
+    int [][] B = new int[9][9];
+  
+   for(int i = 0 ; i < 9 ; i ++ ){
+   for(int j = 0 ; j < 9;j++){
+   String cell = all.get(i)[j];
+   if(cell  == null|| cell.isEmpty()){
+   B[i][j] = -1;
+       System.out.print("Empty"  +"\t" );
+   }
+   else{
+   B[i][j] = Integer.parseInt(cell);
+        System.out.print( B[i][j] + "\t");
+   
+   }
+      
+   
+   }
+    System.out.println("");
+   
+   }
+   SingletonBoard.getInstance().setBoard(B);
     }catch(IOException | CsvException e){
+        System.err.println("ERROR IN FILE");
     e.printStackTrace();
     }
     
     }
-    public  static void main(String[] args) {
-        GetBoard gb = new GetBoard();
-        gb.ReadData();
-    }
+//    public  static void main(String[] args) {
+//        GetBoard gb = new GetBoard();
+//        gb.ReadData();
+//        int[][] b = SingletonBoard.getInstance().getBoard();
+//    for(int i = 0; i < 9; i++){
+//        for(int j = 0; j < 9; j++){
+//            System.out.print(b[i][j] + "\t");
+//        }
+//        System.out.println("");
+//    }
+//    }
    
     
 }
