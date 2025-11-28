@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @author LapTop
  */
-public abstract class Checker {
+public abstract class Check {
     private SudokuBoard board;
     private List<String> errors =new ArrayList<>();
 
-    public Checker(SudokuBoard board) {
+    public Check(SudokuBoard board) {
         this.board = board;
     }
 

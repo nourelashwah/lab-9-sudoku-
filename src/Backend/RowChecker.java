@@ -8,7 +8,7 @@ package Backend;
  *
  * @author LapTop
  */
-public class RowChecker extends Checker {
+public class RowChecker extends Check {
 
     public RowChecker(SudokuBoard board) {
         super(board);
@@ -38,15 +38,7 @@ public class RowChecker extends Checker {
     }
 
     private String formatError(int rowindex, int dupNum, int[] row) {
-        StringBuilder errorMsg = new StringBuilder();
-        errorMsg.append("ROW ").append(rowindex + 1).append(",#").append(dupNum).append(",[");
-        for (int i = 0; i < row.length; i++) {
-            errorMsg.append(row[i]);
-            if (i < row.length-1) {
-                errorMsg.append(",");
-            }
-        }
-        errorMsg.append("]");
-        return errorMsg.toString();
+       String errorMsg="Row"+(rowindex+1)+",#"+dupNum+",[";
+       
     }
 }
