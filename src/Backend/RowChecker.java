@@ -8,24 +8,25 @@ package Backend;
  *
  * @author LapTop
  */
-public class RowChecker extends Checker {
+public class RowChecker extends  Checker {
 
     GetterOfRCB getterfor = new GetterOfRCB();
-
-    public RowChecker(SudokuBoard board) {
+   
+    public RowChecker( int[][] board) {
         super(board);
     }
 
-    @Override
+   @Override
     public void check(int[][] sudoku) {
         int[][] rows = getterfor.getterfor(sudoku, 'r');
         for (int r = 0; r < 9; r++) {
             int[] row = rows[r];
 
+
             for (int c = 0; c < row.length; c++) {
                 int now = row[c];
 
-                if (now == 0) {
+                if (now == -1) {
                     continue;
                 }
                 for (int k = 0; k < c; k++) {
@@ -50,4 +51,6 @@ public class RowChecker extends Checker {
         return errorMsg;
 
     }
+
+    
 }
