@@ -13,8 +13,8 @@ public class CheckerColoumn extends Checker {
     
     GetterOfRCB getterfor = new GetterOfRCB();
 
-    public CheckerColoumn(int [][] border) {
-        super(border);
+    public CheckerColoumn() {
+        super();
     }
      
     

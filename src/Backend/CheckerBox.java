@@ -12,8 +12,8 @@ public class CheckerBox extends Checker {
     
     GetterOfRCB getterfor = new GetterOfRCB();
 
-    public CheckerBox(int [][] board) {
-        super(board);
+    public CheckerBox() {
+        super();
     }
     
     @Override

@@ -16,13 +16,10 @@ public abstract class Checker {
     private int [][] board;
     private List<String> errors =new ArrayList<>();
 
-    public Checker(int [][] board) {
-        this.board = board;
+    public Checker() {
+        board = SingletonBoard.getInstance().getBoard();
     }
 
-    public int [][] getBoard() {
-        return board;
-    }
 
     public List<String> getErrors() {
         return errors;

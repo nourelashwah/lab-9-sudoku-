@@ -12,8 +12,8 @@ public class RowChecker extends  Checker {
 
     GetterOfRCB getterfor = new GetterOfRCB();
    
-    public RowChecker( int[][] board) {
-        super(board);
+    public RowChecker() {
+        super();
     }
 
    @Override
