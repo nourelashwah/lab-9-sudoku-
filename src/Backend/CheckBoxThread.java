@@ -11,19 +11,21 @@ import java.util.List;
  * @author LapTop
  */
 public class CheckBoxThread implements Runnable{
-    
-    private CheckerBox checkBoxThread;
+    private final Checker checker;
 
-    public CheckBoxThread() {
-        this.checkBoxThread=new CheckerBox();
+    public CheckBoxThread(int [][] board) {
+        this.checker=new CheckerBox(board);
+    }
+    public CheckBoxThread(int[][] board, int counter){
+        this.checker=new SingleBoxChecker(board, counter);
     }
     @Override
     public void run ()
     {
-    checkBoxThread.check(SingletonBoard.getInstance().getBoard());
+    checker.check(SingletonBoard.getInstance().getBoard());
     }
      public List<String> getErrors()
     {
-        return checkBoxThread.getErrors();
+        return checker.getErrors();
     }
 }

@@ -11,21 +11,23 @@ import java.util.List;
  *
  * @author LapTop
  */
-public class CheckRowThread  implements Runnable
-{
-    private RowChecker rowCheckerThread;
+public class CheckRowThread  implements Runnable{
+    private final Checker checker;
 
-    public CheckRowThread() {
-        this.rowCheckerThread =new RowChecker();
+    public CheckRowThread(int[][] board) {
+        this.checker=new RowChecker(board);
+    }
+    public CheckRowThread(int[][] board, int counter){
+        this.checker=new SingleRowChecker(board, counter);
     }
     @Override
     public void run()
     {
-    rowCheckerThread.check(SingletonBoard.getInstance().getBoard());
+    checker.check(SingletonBoard.getInstance().getBoard());
     }
     public List<String> getErrors ()
     {
-    return rowCheckerThread.getErrors();
+    return checker.getErrors();
     }
     
 }
