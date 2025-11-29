@@ -67,7 +67,9 @@ public class Mainone {
                modeZero(brd);
                 break;
             case 1:
-                
+                double elapsedtime = threethreads.runthreads();
+                System.out.println("TIME TAKEN = "  + elapsedtime);
+                break;
             default:
                 throw new AssertionError();
         }
