@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CheckRowThread  implements Runnable
 {
-    RowChecker rowCheckerThread;
+    private RowChecker rowCheckerThread;
 
     public CheckRowThread() {
         this.rowCheckerThread =new RowChecker();

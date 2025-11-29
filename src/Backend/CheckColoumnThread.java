@@ -11,7 +11,8 @@ import java.util.List;
  * @author LapTop
  */
 public class CheckColoumnThread implements Runnable{
-    CheckerColoumn coloumnCheckerThread;
+    
+    private CheckerColoumn coloumnCheckerThread;
 
     public CheckColoumnThread() {
         this.coloumnCheckerThread=new CheckerColoumn();

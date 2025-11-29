@@ -20,9 +20,6 @@ public abstract class Checker {
         board = SingletonBoard.getInstance().getBoard();
     }
 
-    public int [][] getBoard() {
-        return board;
-    }
 
     public List<String> getErrors() {
         return errors;

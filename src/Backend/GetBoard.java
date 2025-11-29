@@ -14,14 +14,14 @@ import java.util.List;
  * @author it
  */
 public  class  GetBoard {
-    private  String Pth ;
+    private  String pth ;
 
     public GetBoard(String pth) {
-        this.Pth = pth;
+        this.pth = pth;
     }
     
     public  void ReadData(){
-    try(CSVReader r = new CSVReader(new FileReader(Pth))){
+    try(CSVReader r = new CSVReader(new FileReader(pth))){
     List<String[]> all = r.readAll();
     
     int [][] B = new int[9][9];

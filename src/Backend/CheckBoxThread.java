@@ -11,7 +11,8 @@ import java.util.List;
  * @author LapTop
  */
 public class CheckBoxThread implements Runnable{
-    CheckerBox checkBoxThread;
+    
+    private CheckerBox checkBoxThread;
 
     public CheckBoxThread() {
         this.checkBoxThread=new CheckerBox();
