@@ -17,8 +17,7 @@ public class twentyseventhreads {
         ArrayList<CheckColoumnThread> colThreads=new ArrayList<>();
         ArrayList<CheckBoxThread> boxThreads=new ArrayList<>();
         ArrayList<Thread> total=new ArrayList<>();
-        long start = System.nanoTime();
-        long end = 0;
+        
         for(int i=0;i<9;i++){
             CheckRowThread row=new CheckRowThread(i);
             rowThreads.add(row);
@@ -30,15 +29,21 @@ public class twentyseventhreads {
             total.add(new Thread(col));
         }
         for(int i=0;i<9;i++){
+           
             CheckBoxThread box=new CheckBoxThread(i);
             boxThreads.add(box);
             total.add(new Thread(box));
         }
-        for(int i=0;i<total.size();i++)
+        long start = System.nanoTime();
+        long end = 0;
+        for(int i=0;i<total.size();i++){
+           
             total.get(i).start();
+         }
         try{
-            for(int i=0;i<total.size();i++)
-                total.get(i).join();
+            for(int i=0;i<total.size();i++){
+               
+                total.get(i).join();}
             end = System.nanoTime();
         }catch(InterruptedException e){
         System.err.println("ERROR THREAD INTRUPPTED");
@@ -57,6 +62,7 @@ public class twentyseventhreads {
                 System.out.println(errors.get(j));
         }
         System.out.println("\nBOX ERRORS:");
+        
         for(int i=0;i<boxThreads.size();i++){
             List<String> errors=boxThreads.get(i).getErrors();
             for(int j=0;j<errors.size();j++)
