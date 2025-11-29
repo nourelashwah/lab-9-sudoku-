@@ -13,7 +13,7 @@ package Backend;
 // javac -cp "../commons-lang3-3.20.0.jar;../opencsv-5.12.0.jar" Backend/*.java
 // RUN :
 // java -cp ".;../commons-lang3-3.20.0.jar;../opencsv-5.12.0.jar" Backend.Mainone ../soduku.csv 0
-// NOTE THESE COMMANDS WERE RUN IN THE SRC FILE IN TERMINAL BEFOR RUNNING MAKE SURE URE IN SRC
+// NOTE THESE COMMANDS WERE RUN IN THE SRC FILE IN TERMINAL BEFORE RUNNING MAKE SURE URE IN SRC
 public class Mainone {
     private static void modeZero(int [][] brd){
         
@@ -65,6 +65,8 @@ public class Mainone {
             case 0:
                modeZero(brd);
                 break;
+            case 1:
+                
             default:
                 throw new AssertionError();
         }
