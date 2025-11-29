@@ -8,9 +8,9 @@ package Backend;
  *
  * @author malak
  */
-public class SingleColumnChecker extends Checker implements Runnable{
-    GetterOfRCB getter=new GetterOfRCB();
-    int counter;
+public class SingleColumnChecker extends Checker{
+    private final GetterOfRCB getter=new GetterOfRCB();
+    private final int counter;
     public SingleColumnChecker(int[][] board, int counter) {
         super(board);
         this.counter=counter;
@@ -30,12 +30,7 @@ public class SingleColumnChecker extends Checker implements Runnable{
             }
         }
     }
-
-    @Override
-    public void run() {
-        check(SingletonBoard.getInstance().getBoard());
-    }
-     private String formatError(int coloumnindex, int dupNum, int[] coloumn) {
+    private String formatError(int coloumnindex, int dupNum, int[] coloumn) {
         StringBuilder errorMsg = new StringBuilder();
         errorMsg.append("COLOUMN ").append(coloumnindex + 1).append(",#").append(dupNum).append(",[");
         for (int i = 0; i < coloumn.length; i++) {

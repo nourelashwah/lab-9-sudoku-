@@ -17,7 +17,7 @@ public class CheckerColoumn extends Checker {
         super(border);
     }
      
-     
+    
     @Override
      public void check(int[][] sudoku)
      {
