@@ -4,6 +4,8 @@
  */
 package Backend;
 
+import java.util.HashMap;
+
 /**
  *
  * @author malak
@@ -19,21 +21,38 @@ public class SingleBoxChecker extends Checker {
     public void check(int[][] sudoku){
         int[][][] boxes=getter.getBoxes(sudoku);
         int[][] box=boxes[counter];
+        HashMap<Integer,Boolean> covered = new HashMap<>();
+        for (int i = 1 ;i<=9;i++ ){
+        covered.put(i, Boolean.FALSE);
+        }
         for(int row=0;row<3;row++){
             for(int col=0;col<3;col++){
                 int now=box[row][col];
                 if(now==-1)
                     continue; //for now
-                for(int rPrev=0;rPrev<row;rPrev++){
-                    for(int cPrev=0;cPrev<col;cPrev++){
-                        if(rPrev==row&&cPrev>=col)
-                            break;
-                        if(box[rPrev][cPrev] == now) {
-                            addError(formatError(counter, now, box));
-                            break;
-                        }
-                    }
+                
+                if(covered.get(now))
+                addError(formatError(counter, now, box));
+                         
+
+                else{
+                covered.put(now, Boolean.TRUE);
                 }
+                //aaaaaaaaa
+//      kan beylef 3l adim bas kan bey skip duplicates for some reason   
+//for(int rPrev=0;rPrev<row;rPrev++){
+//                    for(int cPrev=0;cPrev<col;cPrev++){
+//                        if(rPrev==row&&cPrev>=col)
+//                            break;
+//                        if(box[rPrev][cPrev] == now) {
+//                            
+//                            //break;
+//                            //heya 3mtn tele3 msh deh el moshkela
+//// deleted 3shan nafs el rakm mmkn yekon mt3ad kaza mara 
+//                        }
+//                    }
+//                }
+
             }
         }
     }
