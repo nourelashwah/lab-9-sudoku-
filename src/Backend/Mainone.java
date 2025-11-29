@@ -18,14 +18,15 @@ public class Mainone {
     private static void modeZero(int [][] brd){
         
         SingletonBoard.getInstance().setBoard(brd);
+        int[][] b = SingletonBoard.getInstance().getBoard();
          
         RowChecker row = new RowChecker();
-        row.check(brd);
+        row.check(b);
         CheckerColoumn col = new CheckerColoumn();
-        col.check(brd);
+        col.check(b);
         CheckerBox box = new CheckerBox();
-        box.check(brd);
-         int[][] b = SingletonBoard.getInstance().getBoard();
+        box.check(b);
+       
 //    for(int i = 0; i < 9; i++){
 //        for(int j = 0; j < 9; j++){
 //            System.out.print(b[i][j] + "\t");

@@ -14,23 +14,23 @@ import java.util.List;
  * @author it
  */
 public  class  GetBoard {
-    private  String Pth ;
+    private  String pth ;
 
     public GetBoard(String pth) {
-        this.Pth = pth;
+        this.pth = pth;
     }
     
     public  void ReadData(){
-    try(CSVReader r = new CSVReader(new FileReader(Pth))){
+    try(CSVReader r = new CSVReader(new FileReader(pth))){
     List<String[]> all = r.readAll();
     
-    int [][] B = new int[9][9];
+    int [][] a = new int[9][9];
   
    for(int i = 0 ; i < 9 ; i ++ ){
    for(int j = 0 ; j < 9;j++){
    String cell = all.get(i)[j];
    if(cell  == null|| cell.isEmpty()){
-   B[i][j] = -1;
+   a[i][j] = -1;
        System.out.print("Empty"  +"\t" );
        continue;
    }
@@ -40,7 +40,7 @@ public  class  GetBoard {
    
    }
    else{
-   B[i][j] = cel;
+   a[i][j] = cel;
 //        System.out.print( B[i][j] + "\t");
    
    }
@@ -50,7 +50,7 @@ public  class  GetBoard {
 //    System.out.println("");
    
    }
-   SingletonBoard.getInstance().setBoard(B);
+   SingletonBoard.getInstance().setBoard(a);
     }catch(IOException | CsvException e){
         System.err.println("ERROR IN FILE");
     e.printStackTrace();
