@@ -15,13 +15,13 @@ public class CheckRowThread  implements Runnable
 {
     RowChecker rowCheckerThread;
 
-    public CheckRowThread(SudokuBoard board) {
-        this.rowCheckerThread =new RowChecker (board);
+    public CheckRowThread(int[][] board) {
+        this.rowCheckerThread =new RowChecker(board);
     }
     @Override
     public void run()
     {
-    rowCheckerThread.check(rowCheckerThread.getBoard().getSudokoBored());//mafrod hena ab3t lel check method matrix of the board 
+    rowCheckerThread.check(SingletonBoard.getInstance().getBoard());
     }
     public List<String> getErrors ()
     {
