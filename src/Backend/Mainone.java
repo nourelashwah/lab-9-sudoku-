@@ -16,12 +16,14 @@ package Backend;
 // NOTE THESE COMMANDS WERE RUN IN THE SRC FILE IN TERMINAL BEFOR RUNNING MAKE SURE URE IN SRC
 public class Mainone {
     private static void modeZero(int [][] brd){
+        
+        SingletonBoard.getInstance().setBoard(brd);
          
-        RowChecker row = new RowChecker(brd);
+        RowChecker row = new RowChecker();
         row.check(brd);
-        CheckerColoumn col = new CheckerColoumn(brd);
+        CheckerColoumn col = new CheckerColoumn();
         col.check(brd);
-        CheckerBox box = new CheckerBox(brd);
+        CheckerBox box = new CheckerBox();
         box.check(brd);
          int[][] b = SingletonBoard.getInstance().getBoard();
 //    for(int i = 0; i < 9; i++){

@@ -13,8 +13,8 @@ import java.util.List;
 public class CheckColoumnThread implements Runnable{
     CheckerColoumn coloumnCheckerThread;
 
-    public CheckColoumnThread(int [][] board) {
-        this.coloumnCheckerThread=new CheckerColoumn(board);
+    public CheckColoumnThread() {
+        this.coloumnCheckerThread=new CheckerColoumn();
     }
     @Override
     public void run(){

@@ -15,8 +15,8 @@ public class CheckRowThread  implements Runnable
 {
     RowChecker rowCheckerThread;
 
-    public CheckRowThread(int[][] board) {
-        this.rowCheckerThread =new RowChecker(board);
+    public CheckRowThread() {
+        this.rowCheckerThread =new RowChecker();
     }
     @Override
     public void run()
