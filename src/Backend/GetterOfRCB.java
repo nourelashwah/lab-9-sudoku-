@@ -10,11 +10,12 @@ package Backend;
  */
 public class GetterOfRCB {
     
-    int[][] matrix = new int[9][9];
+    //int[][] matrix = new int[9][9];
     
     
     public int[][] getterfor(int[][] arr,char b)
     {
+        int[][] matrix = new int[9][9]; 
         switch (b) {
             case 'c':
                 //han2smhm coloumns
@@ -55,7 +56,7 @@ public class GetterOfRCB {
                         for(int row = 0 ; row < 3 ; row ++)
                         {
                             //kda bn-loop gowa el box
-                            boxes[boxNum][row][coloumn] = matrix[OuterR * 3 + row][OuterC * 3 + coloumn];
+                            boxes[boxNum][row][coloumn] = array[OuterR * 3 + row][OuterC * 3 + coloumn];
                         }
                     }
                     

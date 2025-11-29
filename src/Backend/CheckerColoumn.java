@@ -13,13 +13,13 @@ public class CheckerColoumn extends Checker {
     
     GetterOfRCB getterfor = new GetterOfRCB();
 
-    public CheckerColoumn(CheckerColoumn border) {
-        super(border);
+    public CheckerColoumn() {
+        super();
     }
      
      
     @Override
-     public void Check(int[][] sudoku)
+     public void check(int[][] sudoku)
      {
          int[][] coloumns = getterfor.getterfor(sudoku, 'c'); 
          
@@ -30,11 +30,12 @@ public class CheckerColoumn extends Checker {
              for(int r = 0 ; r < coloumn1.length ; r++ )
              {
                  int now = coloumn1[r];
-                 if(now == 0 )
+                 if(now == -1 )
                  {
                      //lw el row b zero, N3ML EH? 
                      continue; //mo2ktan hakml, bs mesh mfrod error?
                  }
+
                  for (int k = 0; k < r; k++) {
                         if (coloumn1[k] == now) { //DUPLICATE!!
                             addError(formatError(c, now, coloumn1));

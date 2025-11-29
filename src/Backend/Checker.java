@@ -13,21 +13,21 @@ import java.util.List;
  */
 public abstract class Checker {
     
-    private SudokuBoard board;
+    private int [][] board;
     private List<String> errors =new ArrayList<>();
 
-    public Checker(SudokuBoard board) {
-        this.board = board;
+    public Checker() {
+        board = SingletonBoard.getInstance().getBoard();
     }
 
-    public SudokuBoard getBoard() {
+    public int [][] getBoard() {
         return board;
     }
 
     public List<String> getErrors() {
         return errors;
     }
-    public abstract void Check(int[][] arr);
+    public abstract void check(int[][] sudoku);
     protected void addError(String message)
     {
     errors.add(message);
