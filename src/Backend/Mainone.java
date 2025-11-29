@@ -39,10 +39,6 @@ public class Mainone {
                  elapsedtime = threethreads.runthreads();
                 System.out.println("TIME TAKEN = "  + elapsedtime);
                 break;
-            case 2:
-                 elapsedtime = twentyseventhreads.runthreads();
-                System.out.println("TIME TAKEN = "  + elapsedtime);
-                break;
             default:
                 throw new AssertionError();
         }
