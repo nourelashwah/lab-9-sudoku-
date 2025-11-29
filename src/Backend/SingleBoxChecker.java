@@ -11,8 +11,8 @@ package Backend;
 public class SingleBoxChecker extends Checker {
     private final GetterOfRCB getter=new GetterOfRCB();
     private final int counter;
-    public SingleBoxChecker(int[][] board, int counter) {
-        super(board);
+    public SingleBoxChecker(int counter) {
+        super();
         this.counter=counter;
     }
     @Override

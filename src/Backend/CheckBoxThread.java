@@ -13,11 +13,11 @@ import java.util.List;
 public class CheckBoxThread implements Runnable{
     private final Checker checker;
 
-    public CheckBoxThread(int [][] board) {
-        this.checker=new CheckerBox(board);
+    public CheckBoxThread() {
+        this.checker=new CheckerBox();
     }
-    public CheckBoxThread(int[][] board, int counter){
-        this.checker=new SingleBoxChecker(board, counter);
+    public CheckBoxThread( int counter){
+        this.checker=new SingleBoxChecker(counter);
     }
     @Override
     public void run ()

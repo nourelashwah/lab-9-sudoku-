@@ -11,8 +11,8 @@ package Backend;
 public class SingleColumnChecker extends Checker{
     private final GetterOfRCB getter=new GetterOfRCB();
     private final int counter;
-    public SingleColumnChecker(int[][] board, int counter) {
-        super(board);
+    public SingleColumnChecker( int counter) {
+        super();
         this.counter=counter;
     }
 

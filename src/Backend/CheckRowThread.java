@@ -14,11 +14,11 @@ import java.util.List;
 public class CheckRowThread  implements Runnable{
     private final Checker checker;
 
-    public CheckRowThread(int[][] board) {
-        this.checker=new RowChecker(board);
+    public CheckRowThread() {
+        this.checker=new RowChecker();
     }
-    public CheckRowThread(int[][] board, int counter){
-        this.checker=new SingleRowChecker(board, counter);
+    public CheckRowThread( int counter){
+        this.checker=new SingleRowChecker( counter);
     }
     @Override
     public void run()

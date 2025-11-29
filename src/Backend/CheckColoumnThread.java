@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class CheckColoumnThread implements Runnable{
     private final Checker checker;
-    public CheckColoumnThread(int [][] board) {
-        this.checker=new CheckerColoumn(board);
+    public CheckColoumnThread() {
+        this.checker=new CheckerColoumn();
     }
-    public CheckColoumnThread(int[][] board, int counter){
-        this.checker=new SingleColumnChecker(board, counter);
+    public CheckColoumnThread( int counter){
+        this.checker=new SingleColumnChecker(counter);
     }
     @Override
     public void run(){
