@@ -34,11 +34,11 @@ public class Handler implements Viewable{
        
         switch (level) {
             case EASY:
-                return load.loadEasyGame(); 
+                return load.loadGame("easy"); 
             case MEDIUM:
-                return load.loadMediumGame();
+                return load.loadGame("medium");
             case HARD:
-                return load.loadHardGame();
+                return load.loadGame("hard");
             default:
                 JOptionPane.showMessageDialog(null, "ERRORRR!! CANNOT FIND THE DIFFICULTY");
                 return null;

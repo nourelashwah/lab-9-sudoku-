@@ -7,6 +7,8 @@ package Controller;
 import Model.Viewable;
 import Model.*;
 import View.*;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public abstract class MainStartUp implements Viewable {
     private Catalog catalog;
+    private Control control;
 
     public MainStartUp(Catalog catalog) {
         this.catalog = catalog;
@@ -26,6 +29,8 @@ public abstract class MainStartUp implements Viewable {
 
         if (hasUnfinished) {
             
+          Handler model = new Handler();
+          
           Continue frame = new Continue(this);
           frame.setVisible(true);
 
@@ -33,7 +38,20 @@ public abstract class MainStartUp implements Viewable {
            StartUp frame = new StartUp(this);
            frame.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null,"No games available yet");
+            JFileChooser chooser = new JFileChooser();
+            int result = chooser.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+
+         int[][] solved = Load.loadSolution(file.getPath());
+
+        try {
+            control.driveGames(solved); 
+            JOptionPane.showMessageDialog(null, "Levels generated!");
+        } catch (SolutionInvalidException e) {
+            JOptionPane.showMessageDialog(null, "Invalid solved file!");
+        }
+         }
         }
     }
 
