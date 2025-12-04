@@ -14,22 +14,22 @@ package Model;
 
 public class Game {
 
-    private int[][] grid;      
+    private int[][] board;      
     private boolean completed;
     private final String difficulty;
 
-    public Game(int[][] grid, String difficulty) {
-        this.grid = copyGrid(grid);  
+    public Game(int[][] board, String difficulty) {
+        this.board = copyBoard(board);  
         this.difficulty = difficulty;
         this.completed = false;
     }
 
-    public int[][] getGrid() { 
-        return grid; 
+    public int[][] getBoard() { 
+        return board; 
     }
 
-    public void setGrid(int[][] grid) { 
-        this.grid = copyGrid(grid); 
+    public void setBoard(int[][] grid) { 
+        this.board = copyBoard(grid); 
     }
 
     public boolean isCompleted() { 
@@ -45,7 +45,7 @@ public class Game {
     }
     
 
-    private int[][] copyGrid(int[][] original) {
+    private int[][] copyBoard(int[][] original) {
     int[][] copy = new int[9][9];
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
@@ -56,9 +56,4 @@ public class Game {
     }
 
     
-
-    public boolean isValid() {
-        // implement Sudoku validation logic
-        return true;
-    }
 }

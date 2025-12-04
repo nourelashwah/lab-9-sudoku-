@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.Catalogue;
+import Model.Catalog;
 
 /**
  *
@@ -17,7 +17,7 @@ public interface Controllable
     
     
     
-  Catalogue getCatalog();
+  Catalog getCatalog();
   int[][] getGame(char level) throws NotFoundException;
   void driveGames(int[][] source) throws SolutionInvalidException;
   // A boolean array which says if a specifc cell is correct or invalid

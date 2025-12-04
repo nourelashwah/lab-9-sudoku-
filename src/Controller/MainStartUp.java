@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Viewable;
 import Model.*;
 import View.*;
 import javax.swing.JOptionPane;
@@ -27,7 +28,7 @@ public abstract class MainStartUp implements Viewable {
            
           Game game = Load.loadUnfinishedGame();
           ///halyan b-handle da
-          GameFrame frame = new GameFrame(game,this);
+          CurrentGame frame = new CurrentGame(game,this);
           frame.setVisible(true);
 
           

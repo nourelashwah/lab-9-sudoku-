@@ -8,10 +8,6 @@ package Model;
  *
  * @author DELL
  */
-public class Load {
-    
-   
-        //han-load el 4, hsb howa easy, medium, hard wala unfinished
-        //fe method "loadUnfinishedGame"
+public class Saving {
     
 }

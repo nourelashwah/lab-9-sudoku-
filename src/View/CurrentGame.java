@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import Controller.Control;
+import Controller.MainStartUp;
+import Model.Game;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -13,8 +18,19 @@ public class CurrentGame extends javax.swing.JFrame {
     /**
      * Creates new form CurrentGame
      */
-    public CurrentGame(int[][] board) {
+    private Control control;
+    private Game game;
+
+   
+    
+    public CurrentGame(Game game, MainStartUp aThis) {
+        
         initComponents();
+        this.game=game;
+    }
+
+    private CurrentGame() {
+       //mo2ktan 3shan el error bs
     }
 
     /**
@@ -26,94 +42,144 @@ public class CurrentGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButton1 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        matrixGame = new javax.swing.JTable();
+        solveBUTTON = new javax.swing.JButton();
+        undoBUTTON = new javax.swing.JButton();
+        validateBUTTON = new javax.swing.JButton();
+        titleTXT = new javax.swing.JLabel();
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        matrixGame.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "", "", ""
+                "", "", "", "", "", "", "", "", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("");
-        }
+        matrixGame.getTableHeader().setReorderingAllowed(false);
 
-        jButton1.setText("Solve");
-
-        jButton2.setText("Undo");
-
-        jButton3.setText("Validate");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        solveBUTTON.setText("Solve");
+        solveBUTTON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                solveBUTTONActionPerformed(evt);
             }
         });
+
+        undoBUTTON.setText("Undo");
+        undoBUTTON.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoBUTTONActionPerformed(evt);
+            }
+        });
+
+        validateBUTTON.setText("Validate");
+        validateBUTTON.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validateBUTTONActionPerformed(evt);
+            }
+        });
+
+        titleTXT.setFont(new java.awt.Font("Franklin Gothic Medium", 2, 36)); // NOI18N
+        titleTXT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleTXT.setText("Sudoku Game!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(titleTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(validateBUTTON, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(undoBUTTON, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(solveBUTTON, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(solveBUTTON)
+                            .addComponent(undoBUTTON)
+                            .addComponent(validateBUTTON))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(43, Short.MAX_VALUE)
+                        .addComponent(titleTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGap(82, 82, 82))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void validateBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateBUTTONActionPerformed
+        int[][] board = game.getBoard();
+        boolean[][] result = control.verifyGame(board);
         
-        //m3ana el board
-        // n validate ba
-    }//GEN-LAST:event_jButton3ActionPerformed
+        for(int i = 0 ; i < 9 ; i++)
+        {
+            for(int j = 0 ; j < 9 ; j ++)
+            {
+                if(!result[i][j])
+                {
+                    //kda y3ne fe cell mesh sah!!
+                    //neshuf ba han-handle ezay
+                    JOptionPane.showMessageDialog(this,"ERROR! AN INVALID CELL FOUND!");
+                }
+            }
+        }
+    }//GEN-LAST:event_validateBUTTONActionPerformed
+
+    private void solveBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBUTTONActionPerformed
+        int[][]board = game.getBoard();
+        
+        try{  //3shan DE bt-throw exception
+            int[][] solve = control.solveGame(board); //722na fekrt enena bnady el implementation
+            //n-handle ba el solve
+        }
+        catch(InvalidGame exception)
+        {
+            JOptionPane.showMessageDialog(this, "ERROR!");
+        }
+    }//GEN-LAST:event_solveBUTTONActionPerformed
+
+    private void undoBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoBUTTONActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_undoBUTTONActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,10 +217,14 @@ public class CurrentGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable matrixGame;
+    private javax.swing.JButton solveBUTTON;
+    private javax.swing.JLabel titleTXT;
+    private javax.swing.JButton undoBUTTON;
+    private javax.swing.JButton validateBUTTON;
     // End of variables declaration//GEN-END:variables
+
+    
 }
