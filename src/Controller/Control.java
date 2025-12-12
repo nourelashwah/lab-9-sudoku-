@@ -15,6 +15,7 @@ import java.util.List;
 public class Control implements Controllable {
     
     private Catalog catalog;
+    Load load;
     
     @Override
     public Catalog getCatalog() {
@@ -24,7 +25,8 @@ public class Control implements Controllable {
     @Override
     public int[][] getGame(char level) throws NotFoundException {
      
-        return null;
+        int[][] board = load.getGame('e');
+        return board;
      
     }
 
@@ -59,6 +61,16 @@ public class Control implements Controllable {
       
       Game hardGame = new Game(hardBoard, "hard");
       
+      
+      
+      
+      //before adding, VERIFY!!
+      
+      
+      //IF ERROR, THROW THE INVALID SOLUTION EXCEPTION!
+      
+      
+      //if verify is done, and everything fine, WOHOOOO WE HAVE OUR GAMES!!
       catalog.addNew(easyGame);
       catalog.addNew(mediumGame);
       catalog.addNew(hardGame);

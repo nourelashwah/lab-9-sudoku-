@@ -7,6 +7,7 @@ package Model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 public class Saving {
     
      private final static Random random = new Random();
+     Load load;
     
     
     public void SavingToFolder(Game game) throws IOException
@@ -41,8 +43,26 @@ public class Saving {
         }
         
         
+        String randomid;
+        String test;
+        boolean bol=true;
+      
+            test = generateRandomName();
+            List<String> names = load.GetAllNames();
+            for(String l : names)
+            {
+                if(l.equals(test))
+                {
+                    bol=false;
+                break;}
+            }
+            if(bol == true)
+            {
+                //mfish duplicates!!
+                randomid = test;
+            }
         
-        String fileName = path + "/" + "Sudoku_" + generateRandomName() + ".csv";
+        String fileName = path + "/" + "Sudoku_" + randomid + ".csv";
         
         File file = new File(fileName);
         
@@ -76,5 +96,7 @@ public class Saving {
         int n4 = random.nextInt(10);
         
         return "" + n1+n2+n3+n4;
+        
+        
     }
 }

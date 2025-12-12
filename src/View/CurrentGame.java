@@ -4,7 +4,8 @@
  */
 package View;
 import Controller.Control;
-import Controller.MainStartUp;
+import Controller.Handler;
+
 import Model.Game;
 import javax.swing.JOptionPane;
 
@@ -18,8 +19,9 @@ public class CurrentGame extends javax.swing.JFrame {
     /**
      * Creates new form CurrentGame
      */
-    private Control control;
+
     private Game game;
+    private Handler handler;
 
    
     
@@ -147,7 +149,7 @@ public class CurrentGame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validateBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateBUTTONActionPerformed
-        int[][] board = game.getBoard();
+       /* int[][] board = game.getBoard();
         boolean[][] result = control.verifyGame(board);
         
         for(int i = 0 ; i < 9 ; i++)
@@ -161,11 +163,13 @@ public class CurrentGame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this,"ERROR! AN INVALID CELL FOUND!");
                 }
             }
-        }
+        }*/
+
     }//GEN-LAST:event_validateBUTTONActionPerformed
 
     private void solveBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBUTTONActionPerformed
-        int[][]board = game.getBoard();
+       
+        /*int[][]board = game.getBoard();
         
         try{  //3shan DE bt-throw exception
             int[][] solve = control.solveGame(board); //722na fekrt enena bnady el implementation
@@ -174,7 +178,9 @@ public class CurrentGame extends javax.swing.JFrame {
         catch(InvalidGame exception)
         {
             JOptionPane.showMessageDialog(this, "ERROR!");
-        }
+        }*/
+        
+        
     }//GEN-LAST:event_solveBUTTONActionPerformed
 
     private void undoBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoBUTTONActionPerformed

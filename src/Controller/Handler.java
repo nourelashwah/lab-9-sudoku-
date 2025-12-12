@@ -2,10 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package Controller;
 
+import Controller.Viewable;
 import Controller.Control;
 import Controller.Controllable;
+import Model.Catalog;
+import Model.DifficultyEnum;
+import Model.Game;
+import Model.Load;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +18,12 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 public class Handler implements Viewable{
- 
-    private Load load;
+
     private Catalog catalog;
     private Controllable control; 
 
     public Handler() {
-        load = new Load();
+    
         control = new Control(); 
         catalog = new Catalog(false,false);
     }
@@ -32,7 +36,8 @@ public class Handler implements Viewable{
     @Override
     public Game getGame(DifficultyEnum level) throws NotFoundException {
        
-        switch (level) {
+        char lev = 0;
+      /*  switch (level) {
             case EASY:
                 return load.loadGame("easy"); 
             case MEDIUM:
@@ -42,7 +47,24 @@ public class Handler implements Viewable{
             default:
                 JOptionPane.showMessageDialog(null, "ERRORRR!! CANNOT FIND THE DIFFICULTY");
                 return null;
-        }
+        }*/
+     
+            if (level == DifficultyEnum.EASY) {
+                            lev='e';
+                  } else if (level == DifficultyEnum.MEDIUM) {
+                           lev = 'm';
+                  } else if (level == DifficultyEnum.HARD) {
+                           lev = 'h';
+                }
+                  else if (level == DifficultyEnum.INCOMPLETE)
+                  {
+                      lev = 'i';
+                  }
+
+       int[][] board = control.getGame(lev);
+       Game game = new Game(board, level.toString());
+       return game;
+      
     }
 
     @Override

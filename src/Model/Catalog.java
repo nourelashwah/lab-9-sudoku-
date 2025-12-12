@@ -21,25 +21,36 @@ public class Catalog
         
     }
 
-    public boolean hasUnfinishedGame() {
-        if(load.hasUnifnishedGame() == null)
+    public void hasUnfinishedGame() {
+        if(load.loadGame('i') == null)
         {
-            return false;
+            current = false;
         }
-        return true;
+        current = true;
     }
 
-    public boolean hasAllDifficulties() {
+    public void hasAllDifficulties() {
       
-        if(load.getGame("easy") == null || load.getGame("medium") == null ||  load.getGame("hard") == null )
+        if(load.loadGame('e') == null || load.loadGame('m') == null ||  load.loadGame('h') == null )
         {
-            return false;
+            allModesExist = false;
         }
-        return true;
+        allModesExist = true;
 
+    }
+
+    public boolean isCurrent() {
+        return current;
+    }
+
+    public boolean isAllModesExist() {
+        return allModesExist;
     }
   
+    
+    
     public void addNew(Game game) throws IOException    //hena bn7othm fel folders 3ala hsb el level
+                                                       //bnftrd en mfish ay error in validation, bn-handlha ABL ma nnady el method de
     {
         if(game!=null)
         {

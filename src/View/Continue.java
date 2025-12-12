@@ -4,9 +4,10 @@
  */
 package View;
 
+import Controller.Handler;
 import Controller.MainStartUp;
+import static Model.DifficultyEnum.INCOMPLETE;
 import Model.Game;
-import Model.Load;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ public class Continue extends javax.swing.JFrame {
     /**
      * Creates new form Continue
      */
+    Handler handler;
     private MainStartUp mainStartUp;
     public Continue(MainStartUp aThis) {
         this.mainStartUp = aThis;
@@ -38,9 +40,9 @@ public class Continue extends javax.swing.JFrame {
         background.setVisible(true);
         //done
         
-        jButton1.setBackground(new Color(173, 216, 230));
-        jButton1.setOpaque(true); 
-        jButton1.setBorderPainted(false); 
+        continueButton.setBackground(new Color(173, 216, 230));
+        continueButton.setOpaque(true); 
+        continueButton.setBorderPainted(false); 
          
          jButton2.setBackground(new Color(173,216,230));
          jButton2.setOpaque(true); 
@@ -60,7 +62,7 @@ public class Continue extends javax.swing.JFrame {
     private void initComponents() {
 
         continueTXT = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        continueButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,10 +72,10 @@ public class Continue extends javax.swing.JFrame {
         continueTXT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         continueTXT.setText("Would you like to continue your game?");
 
-        jButton1.setText("Continue");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        continueButton.setText("Continue");
+        continueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                continueButtonActionPerformed(evt);
             }
         });
 
@@ -93,7 +95,7 @@ public class Continue extends javax.swing.JFrame {
                 .addGap(205, 205, 205)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +104,7 @@ public class Continue extends javax.swing.JFrame {
                 .addGap(81, 81, 81)
                 .addComponent(continueTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(99, Short.MAX_VALUE))
@@ -111,8 +113,8 @@ public class Continue extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          Game game = Load.loadUnfinishedGame();
+    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
+          Game game = handler.getGame(INCOMPLETE);
           if(game!=null){
           ///halyan b-handle da
           CurrentGame frame = new CurrentGame(game,this);
@@ -120,7 +122,7 @@ public class Continue extends javax.swing.JFrame {
           else{
               JOptionPane.showMessageDialog(this, "NO GAME FOUND!!");
           }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_continueButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      
@@ -165,8 +167,8 @@ public class Continue extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton continueButton;
     private javax.swing.JLabel continueTXT;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
