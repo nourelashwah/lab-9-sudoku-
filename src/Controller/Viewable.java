@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package Controller;
-import Model.*;
+
+import Model.Catalog;
+import Model.DifficultyEnum;
+import Model.Game;
+
 
 /**
  *
@@ -20,8 +24,7 @@ public interface Viewable {
   Game getGame(DifficultyEnum level) throws NotFoundException;
   // Gets a sourceSolution and generates three levels of difficulty
   void driveGames(Game source) throws SolutionInvalidException;
-  // Given a game, if invalid returns invalid and the locates the invalid duplicates
-  // if valid and complete, return a value
+  // Given a game, if invalid returns invalid and the locates the invalid duplicates if valid and complete, return a value
   // if valid and incomplete, returns another value
   // The exact repersentation as a string is done as you best see fit
   String verifyGame(Game game);

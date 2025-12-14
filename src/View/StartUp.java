@@ -1,6 +1,7 @@
 
 package View;
 
+import Controller.MainStartUp;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -17,7 +18,7 @@ public class StartUp extends javax.swing.JFrame {
     /**
      * Creates new form StartUp
      */
-    public StartUp() {
+    public StartUp(MainStartUp aThis) {
         
         initComponents();
         
@@ -142,7 +143,7 @@ public class StartUp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StartUp().setVisible(true);
+               
             }
         });
     }

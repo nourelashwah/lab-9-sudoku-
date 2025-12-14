@@ -22,6 +22,7 @@ public class Load {
    private Catalog c;
    
         //han-load el 4, hsb howa easy, medium, hard wala unfinished
+
   private Catalog init() throws IOException{
       // 3shan awel ma yebtedi n intialize el catalog
       boolean ffinalunfin =false;
@@ -106,4 +107,7 @@ public class Load {
        c  = new Catalog(ffinalunfin, allTypesExist);
        return c;
   }
+        //fe method "loadUnfinishedGame"
+    
+
 }
