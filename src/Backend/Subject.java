@@ -9,5 +9,7 @@ package Backend;
  * @author LapTop
  */
 public interface Subject {
+    void add(Observer observer);
+    void notify(int [][] solvedBoard);
     
 }

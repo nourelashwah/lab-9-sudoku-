@@ -9,5 +9,5 @@ package Backend;
  * @author LapTop
  */
 public interface Observer {
-    
+    void update(int [][] sollvedBoard);
 }

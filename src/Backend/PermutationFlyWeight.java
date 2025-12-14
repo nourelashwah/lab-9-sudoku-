@@ -22,7 +22,7 @@ current[i]=1;//3ashn a5ly awl combination ygrbha 11111
     public int[] getCurrent() {
         return current;
     }
-    public void increment()
+    public void increment()//bafdl alf w azwd le7ad ma awsl enohm 99999
     {
         for(int i=current.length-1;i>=0;i--)
         {
