@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Backend.SudokoSolver;
 import Controller.Viewable;
 import Controller.Control;
 import Controller.Controllable;
@@ -24,7 +25,7 @@ public class Handler implements Viewable{
 
     public Handler() {
     
-        control = new Control(); 
+         control = new Control(); 
         catalog = new Catalog(false,false);
     }
 
@@ -79,8 +80,10 @@ public class Handler implements Viewable{
     }
 
     @Override
-    public int[] solveGame(Game game) throws InvalidGame {
-        return null; 
+    public int[][] solveGame(Game game) throws InvalidGame {
+   if (game == null) throw new InvalidGame("no game found");
+        return control.solveGame(game.getBoard());
+    
     }
 
     @Override
