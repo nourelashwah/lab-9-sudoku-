@@ -4,8 +4,10 @@
  */
 package Controller;
 
+import Model.SudokoSolver;
 import Model.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +18,7 @@ public class Control implements Controllable {
     
     private Catalog catalog;
     Load load;
-    
+   
     @Override
     public Catalog getCatalog() {
         return catalog;
@@ -86,9 +88,13 @@ public class Control implements Controllable {
     @Override
     public int[][] solveGame(int[][] game) throws InvalidGame {
        
-        return null;
-      
+  List<int[]> emptyCells = getEmptyCells(game);
+        if (emptyCells.size() != 5) throw new InvalidGame("exactly 5 empty cell needed");
+
+        SudokoSolver solver = new SudokoSolver(game, new ArrayList<>(emptyCells));
+        return solver.solve();
     }
+      
 
     @Override
     public void logUserAction(UserAction userAction) throws IOException {
@@ -117,5 +123,17 @@ public class Control implements Controllable {
         board[x][y] = 0; //talben el empty yekon 0
     }
     }
+    public static List<int[]> getEmptyCells(int[][] board) {
+    List<int[]> emptyCells = new ArrayList<>();
+
+    for (int r = 0; r < 9; r++) {
+        for (int c = 0; c < 9; c++) {
+            if (board[r][c] == 0) {
+                emptyCells.add(new int[]{r, c});
+            }
+        }
+    }
+    return emptyCells;
+}
 
 }
