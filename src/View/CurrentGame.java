@@ -167,15 +167,32 @@ public class CurrentGame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_validateBUTTONActionPerformed
 
+    private int numberOfEmptySpaces()
+    {
+        int[][] board=game.getBoard();
+        int count=0;
+        for(int r=0;r<board.length;r++)
+        {
+          for(int c=0;c<board[r].length;c++)
+          {
+              if(board[r][c]==0)
+              {
+                  count++;
+              }
+          }
+        }
+         return count;
+    
+    }
     private void solveBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBUTTONActionPerformed
        
-        
+      
         
         try{  //3shan DE bt-throw exception
             int[]solve = handler.solveGame(game); //722na fekrt enena bnady el implementation
             if(solve.length!=15)
             {
-            throw new InvalidGame("solution is not in the correct format");
+            throw new InvalidGame("solution is not in the correct format");//in case haga was wrong 
             }
             for(int i= 0;i<solve.length;i+=3)
             {
