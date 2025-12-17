@@ -246,18 +246,47 @@ catch(IllegalArgumentException e){
 
     }//GEN-LAST:event_validateBUTTONActionPerformed
 
+    private int numberOfEmptySpaces()
+    {
+        int[][] board=game.getBoard();
+        int count=0;
+        for(int r=0;r<board.length;r++)
+        {
+          for(int c=0;c<board[r].length;c++)
+          {
+              if(board[r][c]==0)
+              {
+                  count++;
+              }
+          }
+        }
+         return count;
+    
+    }
     private void solveBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBUTTONActionPerformed
        
-        /*int[][]board = game.getBoard();
+      
         
         try{  //3shan DE bt-throw exception
-            int[][] solve = control.solveGame(board); //722na fekrt enena bnady el implementation
-            //n-handle ba el solve
+            int[]solve = handler.solveGame(game); //722na fekrt enena bnady el implementation
+            if(solve.length!=15)
+            {
+            throw new InvalidGame("solution is not in the correct format");//in case haga was wrong 
+            }
+            for(int i= 0;i<solve.length;i+=3)
+            {
+            int row = solve[i];
+            int col = solve[i + 1];
+            int value = solve[i + 2];
+            matrixGame.setValueAt(value, row, col);
+            game.getBoard()[row][col] = value;//b update the actual board mesh just for display
+            }
+            JOptionPane.showMessageDialog(this, "GAME SOLVED!!!");
         }
         catch(InvalidGame exception)
         {
             JOptionPane.showMessageDialog(this, "ERROR!");
-        }*/
+        }
         
         
     }//GEN-LAST:event_solveBUTTONActionPerformed
