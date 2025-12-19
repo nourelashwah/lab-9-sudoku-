@@ -7,6 +7,7 @@ package Controller;
 import Model.Catalog;
 import Model.SolutionInvalidException;
 import Model.InvalidGame;
+import Model.UserAction;
 import java.io.IOException;
 /**
  *

@@ -12,6 +12,10 @@ import Model.InvalidGame;
 import java.io.IOException;
 import java.util.ArrayList;
 import Model.SolutionInvalidException;
+import Model.UserAction;
+import java.io.File;
+import java.io.FileWriter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +77,14 @@ public class Handler implements Viewable{
        }
        }
        Game game = new Game(board, level.toString(),edit);
+       if(level!=DifficultyEnum.INCOMPLETE){        //byt2kd en el game new 34an y create log gdid
+           try{
+               File log=new File("./Levels/unfinished/log.txt");
+               log.createNewFile();
+           }catch(IOException e){
+               System.out.println("ERROR CREATING FILE!");          //momkn n5liha error fl gui b3dein
+           }
+       }
        return game;
       
     }
@@ -128,6 +140,6 @@ public class Handler implements Viewable{
 
     @Override
     public void logUserAction(String userAction) throws IOException {
-       
+       control.logUserAction(new UserAction(userAction));   //byb3t ll control el string bta3 el action 34an el control y3ml append fl file
     }
 }

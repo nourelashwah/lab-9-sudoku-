@@ -6,6 +6,7 @@ package Controller;
 
 import Model.SudokoSolver;
 import Model.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +106,11 @@ public class Control implements Controllable {
 
     @Override
     public void logUserAction(UserAction userAction) throws IOException {
-      
+      try(FileWriter writer=new FileWriter("./Levels/unfinished/log.txt", true);){
+           writer.write(userAction.toString());     //append in file bl user action/moves
+       }catch(IOException e){
+           System.out.println("ERROR APPENDING FILE!");
+       }
     }
    
     
