@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.List;
+
 
 /**
  *
@@ -17,17 +19,31 @@ public class Game {
     private int[][] board;      
     private boolean completed;
     private final String difficulty;
-
-    public Game(int[][] board, String difficulty) {
+private  List<int[]>  editable;
+    public Game(int[][] board, String difficulty,List<int[]>  editable) {
         this.board = copyBoard(board);  
         this.difficulty = difficulty;
         this.completed = false;
+        this.editable = editable;
     }
 
     public int[][] getBoard() { 
         return board; 
     }
+public void editcell(int row,int col,int updatedValue) throws IllegalArgumentException{
+if(!editable.contains(new int []{row , col})){
+throw new IllegalArgumentException("NOT EDITABLE");
+}
+else{
+if(updatedValue<0){
+throw new IllegalArgumentException("VALUE IS NEGATIVE");
+}
+else{
+board[row][col] = updatedValue;
 
+}
+}
+}
     public void setBoard(int[][] grid) { 
         this.board = copyBoard(grid); 
     }
@@ -43,6 +59,11 @@ public class Game {
     public String getDifficulty() { 
         return difficulty; 
     }
+
+    public List<int[]> getEditable() {
+        return editable;
+    }
+    
     
 
     private int[][] copyBoard(int[][] original) {

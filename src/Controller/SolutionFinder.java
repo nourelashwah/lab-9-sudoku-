@@ -28,7 +28,7 @@ public class SolutionFinder implements StartStrategy{   //third option, if both 
             if (result == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
 
-         int[][] solved = Load.loadSolution(file.getPath());
+         int[][] solved = Load.loadSolution(file);
 
         try {
             control.driveGames(solved);  //MESH 3ARFA ANADY MN HANDLER L2NAHA 3YZA GAME TYPE OF OBJECT WANA M3ISH DIFFICULTY ANA LESA 73ML

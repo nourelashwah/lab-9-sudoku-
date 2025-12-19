@@ -27,10 +27,12 @@ public class Control implements Controllable {
     @Override
     public int[][] getGame(char level) throws NotFoundException {
      
-        int[][] board = load.getGame('e');
+        int[][] board = load.loadGame(level);
+      
         return board;
      
     }
+   
 
     @Override
     public void driveGames(int[][] source) throws SolutionInvalidException {
@@ -57,11 +59,11 @@ public class Control implements Controllable {
       removeCells(hardBoard,hardPlaces);
       //kda ehna shelna khlas, el games gahza!
       
-      Game easyGame = new Game(easyBoard, "easy");
+      Game easyGame = new Game(easyBoard, "easy",easyPlaces);
       
-      Game mediumGame = new Game(mediumBoard, "medium");
+      Game mediumGame = new Game(mediumBoard, "medium",mediumPlaces);
       
-      Game hardGame = new Game(hardBoard, "hard");
+      Game hardGame = new Game(hardBoard, "hard",hardPlaces);
       
       
       

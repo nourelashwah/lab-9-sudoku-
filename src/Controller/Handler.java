@@ -64,7 +64,17 @@ public class Handler implements Viewable{
                   }
 
        int[][] board = control.getGame(lev);
-       Game game = new Game(board, level.toString());
+       List<int []> edit = new ArrayList();
+       for(int  i = 0 ; i < 9 ; i ++ ){
+       for(int j = 0 ; j < 9 ; j ++ ){
+           if(board[i][j]<=0){
+           edit.add(new int[]{i,j});
+           board[i][j] =  -Math.abs(board[i][j]);
+           }
+       
+       }
+       }
+       Game game = new Game(board, level.toString(),edit);
        return game;
       
     }
