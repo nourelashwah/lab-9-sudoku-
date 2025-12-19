@@ -270,7 +270,7 @@ catch(IllegalArgumentException e){
       try {
        solve = handler.solveGame(this.game); 
       }
-      catch (Exception e){
+      catch (InvalidGame e){
        JOptionPane.showMessageDialog(this, "ERROR!");
       }
         if(solve!=null){

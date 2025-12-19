@@ -4,16 +4,14 @@
  */
 package Controller;
 
-import Model.SudokoSolver;
-import Controller.Viewable;
-import Controller.Control;
-import Controller.Controllable;
 import Model.Catalog;
 import Model.DifficultyEnum;
 import Model.Game;
-import Model.Load;
 import java.util.List;
-import javax.swing.JOptionPane;
+import Model.InvalidGame;
+import java.io.IOException;
+import java.util.ArrayList;
+import Model.SolutionInvalidException;
 
 /**
  *
@@ -82,7 +80,11 @@ public class Handler implements Viewable{
     @Override
     public void driveGames(Game source) throws SolutionInvalidException {
         if (source == null) return;
-        control.driveGames(source.getBoard());
+        try{
+        control.driveGames(source.getBoard());}
+        catch(Exception e){
+        throw new SolutionInvalidException("ERROR");
+        }
     }
 
     @Override
@@ -96,7 +98,13 @@ public class Handler implements Viewable{
        throw new InvalidGame("no game found");
    }
    int [][]ogBoard = game.getBoard() ;
-   int [][] solvedBoard=control.solveGame(game.getBoard());
+   int [][] solvedBoard = null;
+   try{
+   solvedBoard=control.solveGame(ogBoard);
+   }
+   catch(Exception e ){
+   e.printStackTrace();
+   }
    if(solvedBoard==null)
    {
    throw new InvalidGame("no solution for board");

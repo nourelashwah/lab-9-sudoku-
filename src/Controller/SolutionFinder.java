@@ -8,7 +8,7 @@ import Model.Load;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
+import Model.SolutionInvalidException;
 /**
  *
  * @author DELL

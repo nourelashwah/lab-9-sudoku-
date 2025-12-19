@@ -8,6 +8,10 @@ package Model;
  *
  * @author LapTop
  */
-public class InvalidGame extends Throwable{
+public class InvalidGame extends Exception{
+      public InvalidGame(String message) {
+        super(message);
+    }
+
     
 }

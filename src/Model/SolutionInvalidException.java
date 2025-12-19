@@ -8,14 +8,11 @@ package Model;
  *
  * @author LapTop
  */
-public class InvalidSolutionException extends Throwable {
+public class SolutionInvalidException extends Exception  {
 
-    public InvalidSolutionException(String message) {
+    public SolutionInvalidException(String message) {
         super(message);
     }
 
-    public InvalidSolutionException() {
-    }
-    
     
 }

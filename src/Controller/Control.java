@@ -9,6 +9,7 @@ import Model.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,9 +76,13 @@ public class Control implements Controllable {
       
       
       //if verify is done, and everything fine, WOHOOOO WE HAVE OUR GAMES!!
+      try{
       catalog.addNew(easyGame);
       catalog.addNew(mediumGame);
-      catalog.addNew(hardGame);
+      catalog.addNew(hardGame);}
+      catch(IOException e){
+         e.printStackTrace();
+      }
     }
 
     @Override
