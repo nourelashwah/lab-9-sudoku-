@@ -6,6 +6,7 @@ package View;
 
 import Controller.Handler;
 import Controller.MainStartUp;
+import Model.DifficultyEnum;
 import static Model.DifficultyEnum.INCOMPLETE;
 import Model.Game;
 import java.awt.Color;
@@ -114,7 +115,12 @@ public class Continue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-          Game game = handler.getGame(INCOMPLETE);
+        Game game = null;
+        try{  
+         game = handler.getGame(DifficultyEnum.INCOMPLETE);
+        }catch(Exception e){
+        e.printStackTrace();
+        }
           if(game!=null){
           ///halyan b-handle da
           CurrentGame frame = new CurrentGame(game,this);

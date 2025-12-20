@@ -8,7 +8,9 @@ import Model.Catalog;
 import Model.DifficultyEnum;
 import Model.Game;
 import Model.InvalidGame;
-import Model.InvalidSolutionException;
+import Model.NotFoundException;
+import Model.SolutionInvalidException;
+
 import java.io.IOException;
 
 
@@ -26,7 +28,7 @@ public interface Viewable {
   // Note: the Game class is the representation of the soduko game in the controller
   Game getGame(DifficultyEnum level) throws NotFoundException;
   // Gets a sourceSolution and generates three levels of difficulty
-  void driveGames(Game source) throws InvalidSolutionException;
+  void driveGames(Game source) throws SolutionInvalidException;
   // Given a game, if invalid returns invalid and the locates the invalid duplicates if valid and complete, return a value
   // if valid and incomplete, returns another value
   // The exact repersentation as a string is done as you best see fit
