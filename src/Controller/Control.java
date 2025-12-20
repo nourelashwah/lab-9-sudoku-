@@ -6,9 +6,11 @@ package Controller;
 
 import Model.SudokoSolver;
 import Model.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +21,11 @@ public class Control implements Controllable {
     
     private Catalog catalog;
     Load load;
+    private UndoManager undoManager;
+    private Game game;
     Verifier verifier;
    
+
     @Override
     public Catalog getCatalog() {
         return catalog;
@@ -30,7 +35,8 @@ public class Control implements Controllable {
     public int[][] getGame(char level) throws NotFoundException {
      
         int[][] board = load.loadGame(level);
-      
+        this.game=new Game(board,String.valueOf(level),Control.getEmptyCells(board));   //by3ml el game 34an el manager y3rf y track el moves
+        undoManager=new UndoManager(game);
         return board;
      
     }
@@ -122,10 +128,24 @@ public class Control implements Controllable {
 
     @Override
     public void logUserAction(UserAction userAction) throws IOException {
-      
+        if(undoManager==null)
+            undoManager=new UndoManager(game);      //lazy init 34an y3ml el manager lw el user 3ml 2y move, undo unneeded w/o moves
+      try(FileWriter writer=new FileWriter("./Levels/unfinished/log.txt", true);){
+           writer.write(userAction.toString()+"\n");     //append in file bl user action/moves
+           undoManager.addAction(userAction);
+           
+       }catch(IOException e){
+           System.out.println("ERROR APPENDING FILE!");
+       }
     }
-   
-    
+   public void undoLast(){
+            if(undoManager!=null)
+                undoManager.undo();
+       }
+    public UndoManager getUndoManager() {
+    return undoManager;
+}
+
     
     //helper est3mlnaha abl kda fel Game class
     private int[][] copyBoard(int[][] original) {

@@ -12,6 +12,10 @@ import Model.InvalidGame;
 import java.io.IOException;
 import java.util.ArrayList;
 import Model.SolutionInvalidException;
+import Model.UserAction;
+import java.io.File;
+import java.io.FileWriter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +24,7 @@ import Model.SolutionInvalidException;
 public class Handler implements Viewable{
 
     private Catalog catalog;
-    private Controllable control; 
+    private Control control; 
 
     public Handler() {
     
@@ -73,6 +77,14 @@ public class Handler implements Viewable{
        }
        }
        Game game = new Game(board, level.toString(),edit);
+       if(level!=DifficultyEnum.INCOMPLETE){        //byt2kd en el game new 34an y create log gdid
+           try{
+               File log=new File("./Levels/unfinished/log.txt");
+               log.createNewFile();
+           }catch(IOException e){
+               System.out.println("ERROR CREATING FILE!");          //momkn n5liha error fl gui b3dein
+           }
+       }
        return game;
       
     }
@@ -128,6 +140,19 @@ public class Handler implements Viewable{
 
     @Override
     public void logUserAction(String userAction) throws IOException {
-       
+        String noBracket=userAction.substring(1, userAction.length()-1);
+        String[] parts=noBracket.split(",");
+        int x=Integer.parseInt(parts[0]);
+        int y=Integer.parseInt(parts[1]);
+        int val=Integer.parseInt(parts[2]);
+        int prev=Integer.parseInt(parts[3]);
+       control.logUserAction(new UserAction(x,y,val,prev));   //byb3t ll control el user action object 34an el control y3ml append fl file
     }
+    public void undoLast(){
+        control.undoLast();
+    }
+    public boolean isUndoEmpty() {
+        return control.getUndoManager().isEmpty();
+}
+
 }
