@@ -19,8 +19,10 @@ public class CheckerColoumn extends Checker {
      
     
     @Override
-     public void check(int[][] sudoku)
+     public boolean[][] check(int[][] sudoku)
      {
+          boolean[][] cells = new boolean[9][9];
+          boolean valid;
          int[][] coloumns = getterfor.getterfor(sudoku, 'c'); 
          
          for(int c = 0 ; c < 9 ; c++ )
@@ -29,26 +31,30 @@ public class CheckerColoumn extends Checker {
              
              for(int r = 0 ; r < coloumn1.length ; r++ )
              {
+                   valid = true;
                  int now = coloumn1[r];
-                 if(now == -1 )
+                 if(now == 0 )
                  {
-                     //lw el row b zero, N3ML EH? 
-                     continue; //mo2ktan hakml, bs mesh mfrod error?
+                     valid =  false;
                  }
 
                  for (int k = 0; k < r; k++) {
                         if (coloumn1[k] == now) { //DUPLICATE!!
-                            addError(formatError(c, now, coloumn1));
+                            valid = false;
                             break;
                         }
+                        
              }
+                  cells[r][c] = valid;
          }
-     }}
+             
+     }
+     return cells;}
      
   
     
     
- private String formatError(int coloumnindex, int dupNum, int[] coloumn) {
+/* private String formatError(int coloumnindex, int dupNum, int[] coloumn) {
         StringBuilder errorMsg = new StringBuilder();
         errorMsg.append("COLOUMN ").append(coloumnindex + 1).append(",#").append(dupNum).append(",[");
         for (int i = 0; i < coloumn.length; i++) {
@@ -59,6 +65,6 @@ public class CheckerColoumn extends Checker {
         }
         errorMsg.append("]");
         return errorMsg.toString();
-    }
+    }*/
     
 }

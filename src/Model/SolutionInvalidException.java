@@ -8,9 +8,9 @@ package Model;
  *
  * @author LapTop
  */
-public class SolutionInvalidException extends Exception  {
+public class  SolutionInvalidException extends Exception  {
 
-    public SolutionInvalidException(String message) {
+    public  SolutionInvalidException(String message) {
         super(message);
     }
 

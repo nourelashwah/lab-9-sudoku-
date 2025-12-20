@@ -13,12 +13,10 @@ import Model.*;
  */
 public  class MainStartUp {
     private Catalog catalog;
-    private Handler handler;
     private Control control;
-
-    public MainStartUp(Catalog catalog, Handler handler, Control control) {
+    
+    public MainStartUp(Catalog catalog, Control control) {
         this.catalog = catalog;
-        this.handler = handler;
         this.control = control;
     }
 

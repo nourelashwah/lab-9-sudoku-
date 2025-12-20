@@ -17,8 +17,10 @@ public class CheckerBox extends Checker {
     }
     
     @Override
-    public void check(int[][] sudoku )
+    public boolean[][] check(int[][] sudoku )
     {
+        boolean[][] cells = new boolean[9][9];
+          boolean valid;
         int[][][] boxes = getterfor.getBoxes(sudoku);
         
         //yarab enta 3aref
@@ -28,14 +30,13 @@ public class CheckerBox extends Checker {
             
             for(int row = 0 ; row < 3 ; row ++) //kol box feh 3 rows
             {
+                 valid = true;
                 for(int col = 0 ; col < 3 ; col ++ ) //kol box feh 3 coloumns
                 {
                     int now = box1[row][col]; //ngeb el value eli 3yzeno (el square DA)
-                    if(now == -1)
+                    if(now == 0)
                     {
-                        //3adi dah feh check gowa el getboard nafso
-                        //fady, N3ML EH?
-                        continue; //mo2ktan bs
+                        valid =  false;
                     }
                     for(int rPrev = 0; rPrev <= row; rPrev++) {
                      for(int cPrev = 0; cPrev < 3; cPrev++) {
@@ -43,18 +44,22 @@ public class CheckerBox extends Checker {
                         break;
                          
                          if(box1[rPrev][cPrev] == now) {
-                             addError(formatError(box, now, box1));
-                        break;}
+                             valid =  false;
+                             break;
+                       }
                      }
+                      if (!valid) break;
                     }
+                    cells[(box / 3) * 3 + row][(box % 3) * 3 + col] = valid;
                 }
+                
              } 
         }
-                    
+         return cells;           
     }
     
     
-    private String formatError(int boxIndex, int dupNum, int[][] box) {
+    /*private String formatError(int boxIndex, int dupNum, int[][] box) {
         StringBuilder errorMsg = new StringBuilder();
         errorMsg.append("BOX ").append(boxIndex + 1).append(",#").append(dupNum).append(",[");
         for (int r = 0; r < 3; r++) {
@@ -67,6 +72,6 @@ public class CheckerBox extends Checker {
     }
         errorMsg.append("]");
         return errorMsg.toString();
-    }
+    }*/
          
 }
