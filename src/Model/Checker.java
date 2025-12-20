@@ -29,7 +29,7 @@ public abstract class Checker {
     public List<String> getErrors() {
         return errors;
     }
-    public abstract void check(int[][] sudoku);
+    public abstract boolean[][] check(int[][] sudoku);
     protected void addError(String message)
     {
     errors.add(message);

@@ -78,12 +78,12 @@ public class Handler implements Viewable{
     }
 
     @Override
-    public void driveGames(Game source) throws SolutionInvalidException {
+    public void driveGames(Game source) throws SolutionInvalidException {   //eli hay3mlha call lazm y catch w y-show message mwgoda fel pdf!!
         if (source == null) return;
         try{
         control.driveGames(source.getBoard());}
         catch(Exception e){
-        throw new SolutionInvalidException("ERROR");
+        throw new SolutionInvalidException("ERROR ! INCOMPLETE/INVALID!");
         }
     }
 

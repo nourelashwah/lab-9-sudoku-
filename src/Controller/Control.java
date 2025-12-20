@@ -19,6 +19,7 @@ public class Control implements Controllable {
     
     private Catalog catalog;
     Load load;
+    Verifier verifier;
    
     @Override
     public Catalog getCatalog() {
@@ -39,9 +40,25 @@ public class Control implements Controllable {
     public void driveGames(int[][] source) throws SolutionInvalidException {
         
       if (source == null || source[0].length != 9 || source.length != 9) {
-        throw new SolutionInvalidException("ERROR! INVALID SOLUTION!!");  //da el exception eli han3mlo
+        throw new SolutionInvalidException("ERROR! INVALID OR INCOMPLETE SOLUTION!!");  //da el exception eli han3mlo
     }
       
+      boolean[][] check = verifier.verify(source);
+      if (check == null )
+      {
+          throw new SolutionInvalidException("Error!! Error in handling verification!");
+      }
+      for(int i = 0 ; i < 9 ; i ++)
+      {
+          for (int j = 0 ; j < 9 ; j++)
+          {
+              if (check[i][j] == false)
+              {
+                  throw new SolutionInvalidException("ERROR! INVALID OR INCOMPLETE SOLUTION!");
+              }
+          }
+      }
+     
       RandomPairs rp = new RandomPairs(); 
       int easy = 10;
       int medium = 20;
