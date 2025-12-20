@@ -16,6 +16,7 @@ import Model.UserAction;
 import java.io.File;
 import java.io.FileWriter;
 import javax.swing.JOptionPane;
+import Model.NotFoundException;
 
 /**
  *
