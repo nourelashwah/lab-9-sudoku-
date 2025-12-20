@@ -7,7 +7,10 @@ import Controller.Handler;
 
 import Model.Game;
 import Model.InvalidGame;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -87,17 +90,20 @@ new sudokuTable(game.getEditable(),data, cols)
 matrixGame.getModel().addTableModelListener(l -> {
 int r = l.getFirstRow();
 int c = l.getColumn();
+int old=game.getBoard()[r][c];
+int newVal;
+String action;
 Object val = matrixGame.getValueAt(r, c);
+if(val==null)
+    newVal=0;
+else
+    newVal=(int)val;
 try{
-if(val == null){
- game.editcell(r, c, 0);
-
+ game.editcell(r, c, newVal);
+action="("+r+", "+c+", "+newVal+", "+old+")";
+handler.logUserAction(action);
 }
-else{
-
-game.editcell(r, c, (int)val);
-}}
-catch(IllegalArgumentException e){
+catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an interface el viewable by throw el exception
     JOptionPane.showMessageDialog(this, "INVALID VALUE ENTERED/ENTERED DATA IN UNEDITABLE BLOCK", "ERROR",ERROR);
 }
 });
@@ -304,6 +310,13 @@ catch(IllegalArgumentException e){
 
     private void undoBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoBUTTONActionPerformed
         // TODO add your handling code here:
+        handler.undoLast();
+        loadtable();
+        if(handler.isUndoEmpty()) {  
+        undoBUTTON.setEnabled(false);
+    } else {
+        undoBUTTON.setEnabled(true);
+    }
     }//GEN-LAST:event_undoBUTTONActionPerformed
 
     /**

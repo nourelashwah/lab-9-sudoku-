@@ -14,13 +14,27 @@ public class UserAction {
     private int val;
     private int prev;
 
-    public UserAction(String action) {      //el viewable 3amel el user action string 34an kda dah bya5od string
-        String noBracket=action.substring(1, action.length()-1);
-        String[] parts=noBracket.split(",");
-        this.x=Integer.parseInt(parts[0]);
-        this.y=Integer.parseInt(parts[1]);
-        this.val=Integer.parseInt(parts[2]);
-        this.prev=Integer.parseInt(parts[3]);
+    public UserAction(int x, int y, int val, int prev) {
+        this.x = x;
+        this.y = y;
+        this.val = val;
+        this.prev = prev;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public int getPrev() {
+        return prev;
     }
     @Override
     public String toString(){

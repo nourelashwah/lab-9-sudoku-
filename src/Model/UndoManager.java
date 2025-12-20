@@ -29,6 +29,9 @@ public class UndoManager {
     public void addAction(UserAction action){
         actions.push(action);
     }
+    public boolean isEmpty() {
+        return actions.isEmpty();
+    }
     public void undo(){
         if(!actions.isEmpty()){
             UserAction last=actions.pop();
