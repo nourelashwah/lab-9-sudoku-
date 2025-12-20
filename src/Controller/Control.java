@@ -110,9 +110,7 @@ public class Control implements Controllable {
 
     @Override
     public boolean[][] verifyGame(int[][] game) {
-        
-        return null;
-    
+        return verifier.verify(game);
     }
 
     @Override

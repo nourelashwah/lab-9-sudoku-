@@ -101,7 +101,25 @@ public class Handler implements Viewable{
 
     @Override
     public String verifyGame(Game game) {
-        return null; 
+        int[][] board=game.getBoard();
+        boolean[][] valid=control.verifyGame(board);
+        if(valid==null)
+            return "invalid";
+        boolean incomplete=false;
+        String invalid="";
+        for(int r=0;r<9;r++){
+            for(int c=0;c<9;c++){
+                if(board[r][c]==0)
+                    incomplete=true;
+                if(!valid[r][c])
+                    invalid+=r+","+c+" ";
+            }
+        }
+        if(!invalid.equals(""))
+            return "invalid "+invalid.trim();
+        if(incomplete)
+            return "incomplete";
+        return "valid";
     }
 
     @Override
