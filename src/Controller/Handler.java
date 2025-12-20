@@ -103,24 +103,7 @@ public class Handler implements Viewable{
     @Override
     public String verifyGame(Game game) {
         int[][] board=game.getBoard();
-        boolean[][] valid=control.verifyGame(board);
-        if(valid==null)
-            return "invalid";
-        boolean incomplete=false;
-        String invalid="";
-        for(int r=0;r<9;r++){
-            for(int c=0;c<9;c++){
-                if(board[r][c]==0)
-                    incomplete=true;
-                if(!valid[r][c])
-                    invalid+=r+","+c+" ";
-            }
-        }
-        if(!invalid.equals(""))
-            return "invalid "+invalid.trim();
-        if(incomplete)
-            return "incomplete";
-        return "valid";
+       return verify(board);
     }
 
     @Override
@@ -173,5 +156,24 @@ public class Handler implements Viewable{
     public boolean isUndoEmpty() {
         return control.getUndoManager().isEmpty();
 }
-
+public   String verify(int [][] board){
+ boolean[][] valid=control.verifyGame(board);
+        if(valid==null)
+            return "invalid";
+        boolean incomplete=false;
+        String invalid="";
+        for(int r=0;r<9;r++){
+            for(int c=0;c<9;c++){
+                if(board[r][c]==0)
+                    incomplete=true;
+                if(!valid[r][c])
+                    invalid+=r+","+c+" ";
+            }
+        }
+        if(!invalid.equals(""))
+            return "invalid "+invalid.trim();
+        if(incomplete)
+            return "incomplete";
+        return "valid";
+}
 }

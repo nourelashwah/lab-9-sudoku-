@@ -20,8 +20,12 @@ public class Catalog
         this.allModesExist = allModesExist;
         
     }
+    public Catalog(){
+    hasUnfinishedGame();
+    hasAllDifficulties();
+    }
 
-    public void hasUnfinishedGame() {
+    public  void hasUnfinishedGame() {
         if(load.loadGame('i') == null)
         {
             current = false;
@@ -29,7 +33,7 @@ public class Catalog
         current = true;
     }
 
-    public void hasAllDifficulties() {
+    public  void hasAllDifficulties() {
       
         if(load.loadGame('e') == null || load.loadGame('m') == null ||  load.loadGame('h') == null )
         {

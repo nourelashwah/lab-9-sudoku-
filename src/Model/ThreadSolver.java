@@ -5,6 +5,7 @@
 package Model;
 
 import Backend.zerothreads;
+import Controller.Handler;
 import Model.ThreadManger;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ThreadSolver implements Runnable
     private int [][]board;
     private List<int[]> empty;
     private ThreadManger threadManger;
+    private static Handler h = new Handler();
 
     public ThreadSolver(int start, int end, int[][] board, List<int[]> empty, ThreadManger threadManger) {
         this.start = start;
@@ -44,7 +46,7 @@ public class ThreadSolver implements Runnable
         int []combination =iterator.next();
         int [][] boardTemp=copyBoard(board);
         fillEmpty(boardTemp, combination);
-        if(zerothreads.isBoardValid(boardTemp))
+        if(h.verify(board).equalsIgnoreCase("valid"))
         {
             threadManger.notify(boardTemp);
             return;//3ashn 5las fe solution was found

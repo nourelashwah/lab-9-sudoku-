@@ -24,8 +24,8 @@ public class Control implements Controllable {
     private UndoManager undoManager;
     private Game game;
     Verifier verifier;
-   
 
+      
     @Override
     public Catalog getCatalog() {
         return catalog;
