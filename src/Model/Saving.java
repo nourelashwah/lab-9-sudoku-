@@ -18,11 +18,12 @@ import javax.swing.JOptionPane;
 public class Saving {
     
      private final static Random random = new Random();
-     Load load;
+     Load load ;
     
     
     public void SavingToFolder(Game game) throws IOException
     {
+        load  = new Load();
         String path=null;
         if(game == null )
             return;
@@ -37,6 +38,9 @@ public class Saving {
                 break;
             case "hard":
                 path="Levels/hard";
+                break;
+            case "incomplete":
+                path  ="Levels/unfinished";
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "ERROR! COULDNT SAVE TO FOLDER!!");

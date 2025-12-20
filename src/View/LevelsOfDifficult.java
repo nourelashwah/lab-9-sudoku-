@@ -4,6 +4,13 @@
  */
 package View;
 
+import Controller.Handler;
+import Model.DifficultyEnum;
+import Model.Game;
+import Model.NotFoundException;
+import javax.swing.JOptionPane;
+import Model.NotFoundException;
+
 /**
  *
  * @author DELL
@@ -13,9 +20,14 @@ public class LevelsOfDifficult extends javax.swing.JDialog {
     /**
      * Creates new form LevelsOfDifficult
      */
+    private Handler handler ;
+    private java.awt.Frame parent;
     public LevelsOfDifficult(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent  = parent;
+        this.handler  = new Handler();
         initComponents();
+
     }
 
     /**
@@ -82,57 +94,102 @@ public class LevelsOfDifficult extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try {
+            Game game = handler.getGame(DifficultyEnum.EASY);
+            game.setDifficulty("incomplete");
+            if (game!=null)
+            {
+                CurrentGame frame = new CurrentGame(game,parent);
+                frame.setVisible(true);
+                this.setVisible(Boolean.FALSE);
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Game is null!");
+        } catch (NotFoundException e) {
+            JOptionPane.showMessageDialog(this,"ERROR IN GENERATING GAMES!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try {
+            Game game = handler.getGame(DifficultyEnum.MEDIUM);
+            game.setDifficulty("incomplete");
+            if (game!=null)
+            {
+                CurrentGame frame = new CurrentGame(game,parent);
+                frame.setVisible(true);
+                 this.setVisible(Boolean.FALSE);
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Game is null!");
+        } catch (NotFoundException e) {
+            JOptionPane.showMessageDialog(this,"ERROR IN GENERATING GAMES!");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+
+        try {
+            Game game = handler.getGame(DifficultyEnum.HARD);
+            game.setDifficulty("incomplete");
+            if (game!=null)
+            {
+                CurrentGame frame = new CurrentGame(game,parent);
+                frame.setVisible(true);
+                 this.setVisible(Boolean.FALSE);
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Game is null!");
+        } catch (NotFoundException e) {
+            JOptionPane.showMessageDialog(this,"ERROR IN GENERATING GAMES!");
+        }
+
+    
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LevelsOfDifficult dialog = new LevelsOfDifficult(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(LevelsOfDifficult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                LevelsOfDifficult dialog = new LevelsOfDifficult(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
