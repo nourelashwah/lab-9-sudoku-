@@ -9,6 +9,7 @@ import Controller.MainStartUp;
 import Model.DifficultyEnum;
 import Model.Game;
 import Model.NotFoundException;
+import Model.Saving;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -137,7 +138,11 @@ public class Continue extends javax.swing.JFrame {
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    
+  Saving save = new Saving();
+          save.removeALLFILEsUnfin();
+             this.setVisible(Boolean.FALSE);
+          MainStartUp.restart(); 
+              
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

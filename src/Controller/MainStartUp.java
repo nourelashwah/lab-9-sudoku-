@@ -37,6 +37,10 @@ public  class MainStartUp {
         start.start();
         
     }
+    public static void restart(){
+       MainStartUp app = new MainStartUp();
+        app.start();
+    }
     
 
    

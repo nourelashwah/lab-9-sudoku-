@@ -24,8 +24,32 @@ public class UndoManager {
 
     public UndoManager(Game game) {
         this.game = game;
-        this.actions=new Stack<>();
+        this.actions=stackload();
     }
+    private Stack<UserAction> stackload(){
+    if(!log.isFile()){
+        try{
+    log.createNewFile();}catch(Exception e){e.printStackTrace();}
+    return new Stack<>();
+    }
+    Stack<UserAction> temp = new Stack<>();
+    try(BufferedReader read = new BufferedReader(new FileReader(log.getAbsolutePath()))){
+    
+    String line;
+        while ((line =read.readLine())!=null) {
+         String subString=   line.substring(1, line.length() -1);
+         String [] s = subString.split(",");
+         temp.addFirst(new UserAction(Integer.parseInt(s[0].trim() ),Integer.parseInt(s[1].trim()),Integer.parseInt(s[2].trim()),Integer.parseInt(s[3].trim())));
+            
+        }
+    }catch(Exception e){
+    e.printStackTrace();
+    }
+    return temp;
+    
+    
+    
+    }    
     public void addAction(UserAction action){
         actions.push(action);
     }

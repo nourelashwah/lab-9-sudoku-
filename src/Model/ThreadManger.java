@@ -48,8 +48,9 @@ public class ThreadManger implements Subject{
             }
         }
     }
-    public boolean isSolutionFound(){
-        return done;
+
+    public boolean isSolutionFound() {
+    return done;
     }
     public int [][] solve() throws InvalidGame
     {

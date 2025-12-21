@@ -77,7 +77,8 @@ public class Handler implements Viewable{
        for(int j = 0 ; j < 9 ; j ++ ){
            if(board[i][j]<=0){
            edit.add(new int[]{i,j});
-           board[i][j] =  -Math.abs(board[i][j]);
+           System.out.println(i +"  "+j+"  " +  board[i][j]  + "  "  +  Math.abs(board[i][j]));
+           board[i][j] =  Math.abs(board[i][j]);
            }
        
        }

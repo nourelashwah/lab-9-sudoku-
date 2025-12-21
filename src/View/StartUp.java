@@ -19,10 +19,10 @@ public class StartUp extends javax.swing.JFrame {
      * Creates new form StartUp
      */
     MainStartUp aThis;
-    public StartUp(MainStartUp aThis) {
+    public StartUp() {
         
         initComponents();
-        this.aThis  = aThis;
+       
         //kol da ll background
         ImageIcon backgd = new ImageIcon("src/images/background.jpg");
         Image img = backgd.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);

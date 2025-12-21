@@ -5,6 +5,7 @@
 package View;
 import Controller.Control;
 import Controller.Handler;
+import Controller.MainStartUp;
 
 import Model.Game;
 import Model.InvalidGame;
@@ -257,21 +258,35 @@ e.printStackTrace();
     }//GEN-END:initComponents
 
     private void validateBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateBUTTONActionPerformed
-       /* int[][] board = game.getBoard();
-        boolean[][] result = control.verifyGame(board);
-        
+      int[][] board = game.getBoard();
+        boolean[][] result = c.verifyGame(board);
+        boolean val = false;
         for(int i = 0 ; i < 9 ; i++)
         {
             for(int j = 0 ; j < 9 ; j ++)
             {
-                if(!result[i][j])
+                if(!result[i][j] || board[i][j]==0)
                 {
                     //kda y3ne fe cell mesh sah!!
                     //neshuf ba han-handle ezay
-                    JOptionPane.showMessageDialog(this,"ERROR! AN INVALID CELL FOUND!");
+                    val = true;
+                    
                 }
             }
-        }*/
+        }
+        if(val){
+        JOptionPane.showMessageDialog(this, "ONE OR MORE CELL IS INCORRECT");
+        
+        }
+        else{
+          JOptionPane.showMessageDialog(this, "CORRECTTTTT");
+          Saving save = new Saving();
+          save.removeALLFILEsUnfin();
+           this.setVisible(Boolean.FALSE);
+            MainStartUp.restart(); 
+                
+          
+        }
 
     }//GEN-LAST:event_validateBUTTONActionPerformed
 

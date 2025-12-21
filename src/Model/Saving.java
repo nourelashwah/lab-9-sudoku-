@@ -142,6 +142,20 @@ unfin.mkdirs();
         
         
     } 
+    public void removeALLFILEsUnfin(){
+    
+    String path  ="Levels/unfinished";
+                
+                 File unfin = new File(path);
+                 
+                 if(!unfin.isDirectory()){
+                 return;
+                 }
+                 File[] content = unfin.listFiles();
+                 for(File f : content){
+                 f.delete();
+                 }
+    }
     
 }
 
