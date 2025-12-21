@@ -41,6 +41,22 @@ public class Saving {
                 break;
             case "incomplete":
                 path  ="Levels/unfinished";
+                
+                 File unfin = new File(path);
+if (!unfin.exists()) {
+unfin.mkdirs();
+}
+
+            File[] contentsunfin = unfin.listFiles();
+            
+            if(contentsunfin!=null){
+            for(File f : contentsunfin){
+               if(f.isFile()&&f.getName().endsWith(".csv")){
+               f.delete();
+               }
+              
+            }
+            }
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "ERROR! COULDNT SAVE TO FOLDER!!");
@@ -105,8 +121,8 @@ public class Saving {
            
             }
             writer.close(); //doneeee :D
-            
-            JOptionPane.showMessageDialog(null, "Game saved to: " + file.getAbsolutePath()); //TO CHECK! 
+            //kan 3amal yetl3 f shelto
+            //JOptionPane.showMessageDialog(null, "Game saved to: " + file.getAbsolutePath()); //TO CHECK! 
             
         }
         catch (IOException e) {
@@ -126,7 +142,6 @@ public class Saving {
         
         
     } 
-//    public String SaveUnfin(String s){
-//    if(s instanceof == null s.isEmpty())
-//    }
+    
 }
+

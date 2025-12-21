@@ -33,10 +33,7 @@ public class CheckerColoumn extends Checker {
              {
                    valid = true;
                  int now = coloumn1[r];
-                 if(now == 0 )
-                 {
-                     valid =  false;
-                 }
+                 
 if(now!=0){
                  for (int k = 0; k <  coloumn1.length; k++) {
                         if (k != r && coloumn1[k] == now) { //DUPLICATE!!

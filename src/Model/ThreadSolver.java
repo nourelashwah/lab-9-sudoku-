@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 
@@ -38,9 +34,18 @@ public class ThreadSolver implements Runnable {
         this.threadManger = threadManger;
         this.verifier = new Verifier();
     }
+//private int countEmpty(int[][] board) {
+//int count = 0;
+//for (int[] e : empty) {
+//if (board[e[0]][e[1]] == 0) {
+//count++;
+//}
+//}
+//return count;
+//}
 
-    @Override
-    public void run() {
+   @Override
+public void run() {
         PermutationIterator iterator = new PermutationIterator(new PermutationFlyWeight(5));
         for (long i = 0; i < start && iterator.hasNext(); i++)// bafdl a skip le7ad ma ywsl lel start index
         {
@@ -56,10 +61,7 @@ public class ThreadSolver implements Runnable {
                 return;//3ashn 5las fe solution was found
             }
             count++;
-
         }
-
-   
 
     }
 
@@ -79,11 +81,12 @@ public class ThreadSolver implements Runnable {
             int r = empty.get(i)[0];
             int c = empty.get(i)[1];
             board[r][c] = combo[i]+1;
+            }
         }
-    }
 private boolean isBoardValid(int[][] tempBoard) {
     boolean valid[][] = verifier.verify(tempBoard);
     if (valid == null) {
+            System.out.println("Verifier returned null");
             return false; //le7ad ma ashof fe exception or not
     }
     for (int r = 0; r < 9; r++) {

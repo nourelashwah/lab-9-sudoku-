@@ -156,7 +156,7 @@ return data;
                String fn = f.toString();
                int i = fn.lastIndexOf(".");
                String sub = fn.substring(i);
-               if(sub.equals("csv")){
+               if(sub.equals(".csv")){
                numunfin++;
                }
        

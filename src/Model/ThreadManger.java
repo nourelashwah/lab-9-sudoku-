@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import java.util.ArrayList;
@@ -27,7 +23,7 @@ public class ThreadManger implements Subject{
     @Override
     public void add (Observer observer)
     {
-    observers.add(observer);
+        observers.add(observer);
     }
     @Override
     public void notify(int [][] solvedBoard)
@@ -35,24 +31,25 @@ public class ThreadManger implements Subject{
         if(done){return;}
         done=true;
         solution=solvedBoard;
+        System.out.println("ThreadManger received solution and notifying observers...");
         for(int i=0;i<observers.size();i++)
         {
-        Observer observ=observers.get(i);
-        observ.update(solvedBoard);
+            Observer observ=observers.get(i);
+            observ.update(solvedBoard);
         }
         
         for(int i=0;i<threads.size();i++)
         {
-        Thread t=threads.get(i);
-        if(t.isAlive())
-        {
-            t.interrupt();
+            Thread t=threads.get(i);
+            if(t.isAlive())
+            {
+                t.interrupt();
         
-        }
+            }
         }
     }
     public boolean isSolutionFound(){
-    return done;
+        return done;
     }
     public int [][] solve() throws InvalidGame
     {
@@ -65,15 +62,16 @@ public class ThreadManger implements Subject{
             long end=start+parts-1;
             if(i==threadNumber-1)
             {
-            end=total-1;
+                end=total-1;
             }
+            System.out.println("Starting Thread " + i + " range: " + start + " to " + end);
             ThreadSolver tSolver= new ThreadSolver(start, end, board, empty, this);
             Thread t=new Thread(tSolver);
             threads.add(t);
             t.start();
             
         }
-          boolean allFinished = false;
+        boolean allFinished = false;
 //        while (!done && !allFinished) {
 //            for (int i = 0; i < threads.size(); i++) {
 //                
@@ -91,11 +89,18 @@ public class ThreadManger implements Subject{
 //            ignored.printStackTrace();}
 //        }
         if (!done) {
+            try {
+                for(Thread t : threads) t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!done) {
             throw new InvalidGame("no solution found");
         }
          
-    
-     return solution;
+        return solution;
     }
             
 }

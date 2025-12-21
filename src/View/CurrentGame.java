@@ -9,12 +9,11 @@ import Controller.Handler;
 import Model.Game;
 import Model.InvalidGame;
 import Model.Load;
-import Model.Saving;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
+import Model.DifficultyEnum;
+import Model.Saving;
 
 
 /**
@@ -36,6 +35,8 @@ private Control c ;
         
         initComponents();
         this.game=game;
+        undoBUTTON.setEnabled(false);
+        game.setDifficulty("incomplete");
         handler = new Handler();
         c= new Control(handler.getCatalog(),new Load() );
         c.setGame(game);
@@ -118,7 +119,8 @@ handler.logUserAction(action);
     } else {
         undoBUTTON.setEnabled(true);
     }
- 
+ Saving  save = new Saving();
+ save.SavingToFolder(game);
 //    Saving s = new Saving();
 //    s.SavingToFolder(game);
 }
@@ -294,6 +296,11 @@ e.printStackTrace();
        
       int[]solve =null;
       try {
+          System.out.println("Editable cells:");
+for (int[] cell : game.getEditable()) {
+    System.out.println("Row " + cell[0] + ", Col " + cell[1]);
+}
+
        solve = handler.solveGame(this.game); 
       }
       catch (InvalidGame e){
