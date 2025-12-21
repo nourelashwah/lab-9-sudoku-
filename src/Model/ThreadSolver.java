@@ -19,7 +19,7 @@ public class ThreadSolver implements Runnable {
     private int[][] board;
     private List<int[]> empty;
     private ThreadManger threadManger;
-    private Verifier verifier;
+    private Verifier verifier=new Verifier();
 
     public ThreadSolver(int start, int end, int[][] board, List<int[]> empty, ThreadManger threadManger) {
         this.start = start;

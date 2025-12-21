@@ -36,3 +36,4 @@ current[i]=1;//3ashn a5ly awl combination ygrbha 11111
     }
     
 }
+  

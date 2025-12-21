@@ -5,7 +5,9 @@
 package Controller;
 
 import Model.Catalog;
-
+import Model.SolutionInvalidException;
+import Model.InvalidGame;
+import java.io.IOException;
 /**
  *
  * @author DELL

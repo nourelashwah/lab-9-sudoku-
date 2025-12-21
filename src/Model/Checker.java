@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Backend;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public abstract class Checker {
     public List<String> getErrors() {
         return errors;
     }
-    public abstract void check(int[][] sudoku);
+    public abstract boolean[][] check(int[][] sudoku);
     protected void addError(String message)
     {
     errors.add(message);

@@ -11,14 +11,14 @@ import java.util.ArrayList;
  *
  * @author LapTop
  */
-public class SudokoSolver implements Observer
+public class SudokoSolver implements Observer 
 {
     private  int[][] board;
     private int [][] solution;
     private  ArrayList<int[]> empty;
    
 
-    public SudokoSolver(int[][] board, ArrayList<int[]> empty) {
+    public SudokoSolver(int[][] board, ArrayList<int[]> empty) throws InvalidGame{
         this.board = board;
         this.empty = empty;
         if(empty.size()!=5)

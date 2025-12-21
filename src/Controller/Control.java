@@ -9,6 +9,7 @@ import Model.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Control implements Controllable {
     
     private Catalog catalog;
     Load load;
+    Verifier verifier;
    
     @Override
     public Catalog getCatalog() {
@@ -27,18 +29,36 @@ public class Control implements Controllable {
     @Override
     public int[][] getGame(char level) throws NotFoundException {
      
-        int[][] board = load.getGame('e');
+        int[][] board = load.loadGame(level);
+      
         return board;
      
     }
+   
 
     @Override
     public void driveGames(int[][] source) throws SolutionInvalidException {
         
       if (source == null || source[0].length != 9 || source.length != 9) {
-        throw new SolutionInvalidException("ERROR! INVALID SOLUTION!!");  //da el exception eli han3mlo
+        throw new SolutionInvalidException("ERROR! INVALID OR INCOMPLETE SOLUTION!!");  //da el exception eli han3mlo
     }
       
+      boolean[][] check = verifier.verify(source);
+      if (check == null )
+      {
+          throw new SolutionInvalidException("Error!! Error in handling verification!");
+      }
+      for(int i = 0 ; i < 9 ; i ++)
+      {
+          for (int j = 0 ; j < 9 ; j++)
+          {
+              if (check[i][j] == false)
+              {
+                  throw new SolutionInvalidException("ERROR! INVALID OR INCOMPLETE SOLUTION!");
+              }
+          }
+      }
+     
       RandomPairs rp = new RandomPairs(); 
       int easy = 10;
       int medium = 20;
@@ -57,11 +77,11 @@ public class Control implements Controllable {
       removeCells(hardBoard,hardPlaces);
       //kda ehna shelna khlas, el games gahza!
       
-      Game easyGame = new Game(easyBoard, "easy");
+      Game easyGame = new Game(easyBoard, "easy",easyPlaces);
       
-      Game mediumGame = new Game(mediumBoard, "medium");
+      Game mediumGame = new Game(mediumBoard, "medium",mediumPlaces);
       
-      Game hardGame = new Game(hardBoard, "hard");
+      Game hardGame = new Game(hardBoard, "hard",hardPlaces);
       
       
       
@@ -73,9 +93,13 @@ public class Control implements Controllable {
       
       
       //if verify is done, and everything fine, WOHOOOO WE HAVE OUR GAMES!!
+      try{
       catalog.addNew(easyGame);
       catalog.addNew(mediumGame);
-      catalog.addNew(hardGame);
+      catalog.addNew(hardGame);}
+      catch(IOException e){
+         e.printStackTrace();
+      }
     }
 
     @Override

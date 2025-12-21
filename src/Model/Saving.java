@@ -49,6 +49,7 @@ public class Saving {
       
             test = generateRandomName();
             List<String> names = load.GetAllNames();
+            if(names!=null){
             for(String l : names)
             {
                 if(l.equals(test))
@@ -61,8 +62,11 @@ public class Saving {
                 //mfish duplicates!!
                 randomid = test;
             }
+            else{
+            throw new IOException("DUPLICATES OCCUR");
+            }}
         
-        String fileName = path + "/" + "Sudoku_" + randomid + ".csv";
+        String fileName = path + "/" + "Sudoku_" + test + ".csv";
         
         File file = new File(fileName);
         
@@ -73,9 +77,28 @@ public class Saving {
             for(int i = 0 ; i < board.length; i++)
             {
                 for (int j = 0; j < board[i].length; j++) {
-                      writer.write(board[i][j] + ","); //bn5zno gowa kda
+                       //bn5zno gowa kda
+                      if(j!=(board[i].length-1)){
+                       writer.write(board[i][j]+",");
+                      
+                      }
+                      else{
+                           writer.write(Integer.toString(board[i][j]));
+                      }
+                      
                  }
                 writer.write("\n"); //khlsna line!
+            }
+            List<int []> edit = game.getEditable();
+            int k = 0 ; 
+            for(int []p:edit){
+            String ps = String.format("%d%d", p[0], p[1]);
+            writer.write(ps);
+            if(k!=edit.size()-1){
+            writer.write(",");
+            }
+            k++;
+           
             }
             writer.close(); //doneeee :D
             
@@ -98,5 +121,5 @@ public class Saving {
         return "" + n1+n2+n3+n4;
         
         
-    }
+    } 
 }

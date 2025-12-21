@@ -50,7 +50,7 @@ public class ThreadManger implements Subject{
         }
         }
     }
-    public boolean isSolutionFound(){
+    public boolean isSolutionFound() {
     return done;
     }
     public int [][] solve() throws InvalidGame

@@ -4,16 +4,14 @@
  */
 package Controller;
 
-import Model.SudokoSolver;
-import Controller.Viewable;
-import Controller.Control;
-import Controller.Controllable;
 import Model.Catalog;
 import Model.DifficultyEnum;
 import Model.Game;
-import Model.Load;
 import java.util.List;
-import javax.swing.JOptionPane;
+import Model.InvalidGame;
+import java.io.IOException;
+import java.util.ArrayList;
+import Model.SolutionInvalidException;
 
 /**
  *
@@ -64,15 +62,29 @@ public class Handler implements Viewable{
                   }
 
        int[][] board = control.getGame(lev);
-       Game game = new Game(board, level.toString());
+       List<int []> edit = new ArrayList();
+       for(int  i = 0 ; i < 9 ; i ++ ){
+       for(int j = 0 ; j < 9 ; j ++ ){
+           if(board[i][j]<=0){
+           edit.add(new int[]{i,j});
+           board[i][j] =  -Math.abs(board[i][j]);
+           }
+       
+       }
+       }
+       Game game = new Game(board, level.toString(),edit);
        return game;
       
     }
 
     @Override
-    public void driveGames(Game source) throws SolutionInvalidException {
+    public void driveGames(Game source) throws SolutionInvalidException {   //eli hay3mlha call lazm y catch w y-show message mwgoda fel pdf!!
         if (source == null) return;
-        control.driveGames(source.getBoard());
+        try{
+        control.driveGames(source.getBoard());}
+        catch(Exception e){
+        throw new SolutionInvalidException("ERROR ! INCOMPLETE/INVALID!");
+        }
     }
 
     @Override
@@ -86,7 +98,13 @@ public class Handler implements Viewable{
        throw new InvalidGame("no game found");
    }
    int [][]ogBoard = game.getBoard() ;
-   int [][] solvedBoard=control.solveGame(game.getBoard());
+   int [][] solvedBoard = null;
+   try{
+   solvedBoard=control.solveGame(ogBoard);
+   }
+   catch(Exception e ){
+   e.printStackTrace();
+   }
    if(solvedBoard==null)
    {
    throw new InvalidGame("no solution for board");

@@ -7,30 +7,28 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author it
  */
-public  class  GetBoard {
-    private  String pth ;
+public  abstract class   GetBoard {
+     public  static int[][] ReadData(String pth){
+         int [][] a = new int[9][9];
+  List<int[]> edit=new ArrayList<>() ;
 
-    public GetBoard(String pth) {
-        this.pth = pth;
-    }
-    
-    public  void ReadData(){
     try(CSVReader r = new CSVReader(new FileReader(pth))){
     List<String[]> all = r.readAll();
     
-    int [][] a = new int[9][9];
+  
   
    for(int i = 0 ; i < 9 ; i ++ ){
    for(int j = 0 ; j < 9;j++){
-   String cell = all.get(i)[j];
+   String cell = all.get(i)[j].trim();
    if(cell  == null|| cell.isEmpty()){
-   a[i][j] = -1;
+   a[i][j] = 0;
        System.out.print("Empty"  +"\t" );
        continue;
    }
@@ -46,29 +44,29 @@ public  class  GetBoard {
    }
       
    
-   }
+   }}
 //    System.out.println("");
-   
-   }
-   SingletonBoard.getInstance().setBoard(a);
-    }catch(IOException | CsvException e){
-        System.err.println("ERROR IN FILE");
-    e.printStackTrace();
+ String[] nextLine;
+   if(all.size()>9){
+       
+       nextLine=all.get(9);
+        for (int i = 0; i < nextLine.length; i++) {
+            int pos = Integer.parseInt(nextLine[i]);
+            int x = pos/10;
+            int y = pos%10;
+            a[x][y] = -Math.abs(a[x][y]);
+        }
+        
+   }}
+    catch(Exception e){
+        e.printStackTrace();
+        
     }
+    return a;
+     }
+   
+   
     
-    }
-//    public  static void main(String[] args) {
-//        GetBoard gb = new GetBoard();
-//        gb.ReadData();
-//        int[][] b = SingletonBoard.getInstance().getBoard();
-//    for(int i = 0; i < 9; i++){
-//        for(int j = 0; j < 9; j++){
-//            System.out.print(b[i][j] + "\t");
-//        }
-//        System.out.println("");
-//    }
-//    }
-   
     
 }
 
