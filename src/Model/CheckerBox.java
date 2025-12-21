@@ -30,25 +30,22 @@ public class CheckerBox extends Checker {
             
             for(int row = 0 ; row < 3 ; row ++) //kol box feh 3 rows
             {
-                 valid = true;
                 for(int col = 0 ; col < 3 ; col ++ ) //kol box feh 3 coloumns
                 {
+                    valid = true; // reset for each cell
                     int now = box1[row][col]; //ngeb el value eli 3yzeno (el square DA)
-                    if(now == 0)
+                    if(now != 0)
                     {
-                        valid =  false;
-                    }
-                    for(int rPrev = 0; rPrev <= row; rPrev++) {
-                     for(int cPrev = 0; cPrev < 3; cPrev++) {
-                         if(rPrev == row && cPrev >= col) //y3ne de el cell zat nfsha aw el future, ehna bn-check el previous
-                        break;
-                         
-                         if(box1[rPrev][cPrev] == now) {
-                             valid =  false;
-                             break;
-                       }
-                     }
-                      if (!valid) break;
+                        for(int rPrev = 0; rPrev < 3; rPrev++) {
+                            for(int cPrev = 0; cPrev < 3; cPrev++) {
+                                if(rPrev == row && cPrev == col) continue;
+                                if(box1[rPrev][cPrev] == now) {
+                                    valid = false;
+                                    break;
+                                }
+                            }
+                            if(!valid) break;
+                        }
                     }
                     cells[(box / 3) * 3 + row][(box % 3) * 3 + col] = valid;
                 }

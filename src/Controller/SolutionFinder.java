@@ -9,6 +9,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import Model.SolutionInvalidException;
+import View.StartUp;
 /**
  *
  * @author DELL
@@ -33,6 +34,7 @@ public class SolutionFinder implements StartStrategy{   //third option, if both 
         try {
             control.driveGames(solved);  //MESH 3ARFA ANADY MN HANDLER L2NAHA 3YZA GAME TYPE OF OBJECT WANA M3ISH DIFFICULTY ANA LESA 73ML
             JOptionPane.showMessageDialog(null, "Levels generated!");
+                  new StartUp(null).setVisible(true);
         } catch (SolutionInvalidException e) {
             JOptionPane.showMessageDialog(null, "Invalid solved file!");
         }

@@ -18,11 +18,12 @@ import javax.swing.JOptionPane;
 public class Saving {
     
      private final static Random random = new Random();
-     Load load;
+     Load load ;
     
     
     public void SavingToFolder(Game game) throws IOException
     {
+        load  = new Load();
         String path=null;
         if(game == null )
             return;
@@ -37,6 +38,25 @@ public class Saving {
                 break;
             case "hard":
                 path="Levels/hard";
+                break;
+            case "incomplete":
+                path  ="Levels/unfinished";
+                
+                 File unfin = new File(path);
+if (!unfin.exists()) {
+unfin.mkdirs();
+}
+
+            File[] contentsunfin = unfin.listFiles();
+            
+            if(contentsunfin!=null){
+            for(File f : contentsunfin){
+               if(f.isFile()&&f.getName().endsWith(".csv")){
+               f.delete();
+               }
+              
+            }
+            }
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "ERROR! COULDNT SAVE TO FOLDER!!");
@@ -101,8 +121,8 @@ public class Saving {
            
             }
             writer.close(); //doneeee :D
-            
-            JOptionPane.showMessageDialog(null, "Game saved to: " + file.getAbsolutePath()); //TO CHECK! 
+            //kan 3amal yetl3 f shelto
+            //JOptionPane.showMessageDialog(null, "Game saved to: " + file.getAbsolutePath()); //TO CHECK! 
             
         }
         catch (IOException e) {
@@ -122,4 +142,6 @@ public class Saving {
         
         
     } 
+    
 }
+

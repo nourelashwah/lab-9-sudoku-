@@ -18,7 +18,7 @@ public class Game {
 
     private int[][] board;      
     private boolean completed;
-    private final String difficulty;
+    private  String difficulty;
 private  List<int[]>  editable;
     public Game(int[][] board, String difficulty,List<int[]>  editable) {
         this.board = copyBoard(board);  
@@ -27,11 +27,17 @@ private  List<int[]>  editable;
         this.editable = editable;
     }
 
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public int[][] getBoard() { 
         return board; 
     }
 public void editcell(int row,int col,int updatedValue) throws IllegalArgumentException{
-if(!editable.contains(new int []{row , col})){
+    
+if(editable.contains(new int []{row , col})){
+
 throw new IllegalArgumentException("NOT EDITABLE");
 }
 else{

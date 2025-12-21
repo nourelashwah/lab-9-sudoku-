@@ -38,7 +38,7 @@ public class UndoManager {
             int r=last.getX();
             int c=last.getY();
             int prev=last.getPrev();
-            game.getBoard()[r][c]=prev;
+            game.editcell(r, c, prev);
             ArrayList<String> lines=new ArrayList<>();
             try(BufferedReader br=new BufferedReader(new FileReader(log))){
                 String line;

@@ -15,7 +15,7 @@ public  class MainStartUp {
     private Catalog catalog;
     private Control control;
     
-    
+    private Load l ;
         boolean current;
         boolean allModesExsist;
     
@@ -26,7 +26,7 @@ public  class MainStartUp {
     
     public MainStartUp() {
         catalog = new Catalog(current, allModesExsist);
-        control = new Control();
+        control = new Control(catalog,l);
     }
         
        

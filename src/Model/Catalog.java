@@ -18,25 +18,34 @@ public class Catalog
     public Catalog(boolean current, boolean allModesExist) {
         this.current = current;
         this.allModesExist = allModesExist;
-        
+        savee = new  Saving();
+        load = new Load();
     }
+//    public Catalog(){
+//    hasUnfinishedGame();
+//    hasAllDifficulties();
+//    }
 
-    public void hasUnfinishedGame() {
+    public  boolean hasUnfinishedGame() {
         if(load.loadGame('i') == null)
         {
             current = false;
-        }
-        current = true;
+        }else{
+        current = true;}
+        return current;
     }
 
-    public void hasAllDifficulties() {
+    public  boolean hasAllDifficulties() {
       
-        if(load.loadGame('e') == null || load.loadGame('m') == null ||  load.loadGame('h') == null )
+        if(load.checkGame('e') == false || load.checkGame('m') == false ||  load.checkGame('h') == false )
         {
             allModesExist = false;
+            
         }
-        allModesExist = true;
-
+        else{
+        allModesExist = true;}
+        System.out.println(allModesExist);
+return allModesExist;
     }
 
     public boolean isCurrent() {

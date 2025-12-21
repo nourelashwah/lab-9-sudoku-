@@ -19,32 +19,25 @@ public class RowChecker extends  Checker {
    @Override
     public boolean[][] check(int[][] sudoku) {
         boolean[][] cells = new boolean[9][9];
-        boolean valid;
         int[][] rows = getterfor.getterfor(sudoku, 'r');
         for (int r = 0; r < 9; r++) {
             int[] row = rows[r];
-            
-
             for (int c = 0; c < row.length; c++) {
+                boolean valid = true;
                 int now = row[c];
-                valid = true;
-                
-
-                if (now == 0) {
-                    valid = false;
-                }
+                if(now!=0){
                 for (int k = 0; k < c; k++) {
-                    if (row[k] == now) {
+                    if (k != c &&row[k] == now) {
                         valid = false;
                         break;
                     }
-                }
-                 cells[r][c] = valid;
+                }}
+                cells[r][c] = valid;
             }
-           
         }
         return cells;
     }
+
 
     /*private String formatError(int rowindex, int dupNum, int[] row) {
         String errorMsg = "Row " + (rowindex + 1) + ",#" + dupNum + ",[";

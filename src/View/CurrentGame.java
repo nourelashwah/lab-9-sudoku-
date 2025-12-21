@@ -3,15 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import Controller.Control;
 import Controller.Handler;
 
 import Model.Game;
 import Model.InvalidGame;
+import Model.Load;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Model.DifficultyEnum;
+import Model.Saving;
 
 
 /**
@@ -26,13 +28,20 @@ public class CurrentGame extends javax.swing.JFrame {
 
     private Game game;
     private Handler handler;
-
+private Control c ;
    
     
-    public CurrentGame(Game game, Continue parentFrame) {
+    public CurrentGame(Game game, java.awt.Frame parentFrame) {
         
         initComponents();
         this.game=game;
+        undoBUTTON.setEnabled(false);
+        game.setDifficulty("incomplete");
+        handler = new Handler();
+        c= new Control(handler.getCatalog(),new Load() );
+        c.setGame(game);
+        handler.setControl(c);
+        
         loadtable();
     }
 
@@ -100,11 +109,24 @@ else
     newVal=(int)val;
 try{
  game.editcell(r, c, newVal);
+ this.c.setGame(game);
+ this.handler.setControl(this.c);
+ 
 action="("+r+", "+c+", "+newVal+", "+old+")";
 handler.logUserAction(action);
+ if(handler.isUndoEmpty()) {  
+        undoBUTTON.setEnabled(false);
+    } else {
+        undoBUTTON.setEnabled(true);
+    }
+ Saving  save = new Saving();
+ save.SavingToFolder(game);
+//    Saving s = new Saving();
+//    s.SavingToFolder(game);
 }
 catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an interface el viewable by throw el exception
-    JOptionPane.showMessageDialog(this, "INVALID VALUE ENTERED/ENTERED DATA IN UNEDITABLE BLOCK", "ERROR",ERROR);
+//    JOptionPane.showMessageDialog(this, "INVALID VALUE ENTERED/ENTERED DATA IN UNEDITABLE BLOCK");
+e.printStackTrace();
 }
 });
 }
@@ -274,6 +296,11 @@ catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an i
        
       int[]solve =null;
       try {
+          System.out.println("Editable cells:");
+for (int[] cell : game.getEditable()) {
+    System.out.println("Row " + cell[0] + ", Col " + cell[1]);
+}
+
        solve = handler.solveGame(this.game); 
       }
       catch (InvalidGame e){
@@ -322,37 +349,37 @@ catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an i
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CurrentGame().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CurrentGame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton jRadioButton1;

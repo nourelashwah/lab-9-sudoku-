@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import Model.ThreadManger;
@@ -21,7 +17,7 @@ public class SudokoSolver implements Observer
     public SudokoSolver(int[][] board, ArrayList<int[]> empty) throws InvalidGame{
         this.board = board;
         this.empty = empty;
-        if(empty.size()!=5)
+        if((empty.size())!=5)
         {
         throw new InvalidGame("empty spaces must be 5!!");
         
@@ -30,8 +26,7 @@ public class SudokoSolver implements Observer
     @Override
          public void update(int[][]solvedBoard)
     {
-    this.solution=solvedBoard;
-    
+        this.solution=solvedBoard;
     }
     public int [][] solve() throws InvalidGame
    {
@@ -40,7 +35,7 @@ public class SudokoSolver implements Observer
        return threadManger.solve();
    }
     public int [][] getSolvedBoard(){
-    return solution;
+        return solution;
     }
     
 }

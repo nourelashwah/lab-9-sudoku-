@@ -23,18 +23,39 @@ public class Control implements Controllable {
     Load load;
     private UndoManager undoManager;
     private Game game;
-    Verifier verifier;
-   
+    Verifier verifier = new Verifier();
 
+      
     @Override
     public Catalog getCatalog() {
         return catalog;
     }
+public void SetCatalog(Catalog c){
+this.catalog = c;
+
+        
+   
+}
+
+    public Control(Catalog catalog, Load load) {
+        this.catalog = catalog;
+        this.load = load;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+  
 
     @Override
     public int[][] getGame(char level) throws NotFoundException {
      
         int[][] board = load.loadGame(level);
+        if(board  == null){
+            System.err.println("YARABBBBBBBB MAFIH HAGA 3EDLAAAA");
+            return null;
+        }
         this.game=new Game(board,String.valueOf(level),Control.getEmptyCells(board));   //by3ml el game 34an el manager y3rf y track el moves
         undoManager=new UndoManager(game);
         return board;
@@ -73,7 +94,7 @@ public class Control implements Controllable {
       List<int[]> easyPlaces = rp.generateDistinctPairs(easy);
       List<int[]> mediumPlaces = rp.generateDistinctPairs(medium);
       List<int[]> hardPlaces = rp.generateDistinctPairs(hard);  //kda akhdt int[] bel amakn eli hattshal
-      
+     
       int[][] easyBoard = copyBoard(source);
       int[][] mediumBoard = copyBoard(source);
       int[][] hardBoard = copyBoard(source);  //dol eli hanst3mlhm ba, dol el boards
@@ -117,7 +138,8 @@ public class Control implements Controllable {
     public int[][] solveGame(int[][] game) throws InvalidGame {
        
   List<int[]> emptyCells = getEmptyCells(game);
-        if (emptyCells.size() != 5) throw new InvalidGame("exactly 5 empty cell needed");
+        System.err.println(emptyCells.size()-1);
+        if ((emptyCells.size()-1)!= 5) throw new InvalidGame("exactly 5 empty cell needed");
 
         SudokoSolver solver = new SudokoSolver(game, new ArrayList<>(emptyCells));
         return solver.solve();
@@ -127,7 +149,7 @@ public class Control implements Controllable {
     @Override
     public void logUserAction(UserAction userAction) throws IOException {
         if(undoManager==null)
-            undoManager=new UndoManager(game);      //lazy init 34an y3ml el manager lw el user 3ml 2y move, undo unneeded w/o moves
+            undoManager=new UndoManager(this.game);      //lazy init 34an y3ml el manager lw el user 3ml 2y move, undo unneeded w/o moves
       try(FileWriter writer=new FileWriter("./Levels/unfinished/log.txt", true);){
            writer.write(userAction.toString()+"\n");     //append in file bl user action/moves
            undoManager.addAction(userAction);
