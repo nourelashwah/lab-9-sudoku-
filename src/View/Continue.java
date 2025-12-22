@@ -7,8 +7,9 @@ package View;
 import Controller.Handler;
 import Controller.MainStartUp;
 import Model.DifficultyEnum;
-import static Model.DifficultyEnum.INCOMPLETE;
 import Model.Game;
+import Model.NotFoundException;
+import Model.Saving;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -25,9 +26,12 @@ public class Continue extends javax.swing.JFrame {
      * Creates new form Continue
      */
     Handler handler;
+    private java.awt.Frame parent;
     private MainStartUp mainStartUp;
-    public Continue(MainStartUp aThis) {
-        this.mainStartUp = aThis;
+    public Continue( MainStartUp aThis) {
+        this.handler  = new Handler();
+      
+        mainStartUp = aThis;
         initComponents();
         
         //ll background
@@ -115,62 +119,67 @@ public class Continue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-        Game game = null;
-        try{  
-         game = handler.getGame(DifficultyEnum.INCOMPLETE);
-        }catch(Exception e){
-        e.printStackTrace();
+        try{
+      Game game = handler.getGame(DifficultyEnum.INCOMPLETE);
+           
+            if (game!=null)
+            { game.setDifficulty("incomplete");
+                CurrentGame frame = new CurrentGame(game,this);
+                frame.setVisible(true);
+                 this.setVisible(Boolean.FALSE);
+                
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Game is null!");
+        } catch (NotFoundException e) {
+            JOptionPane.showMessageDialog(this,"ERROR IN GENERATING GAMES!");
         }
-          if(game!=null){
-          ///halyan b-handle da
-          CurrentGame frame = new CurrentGame(game,this);
-          frame.setVisible(true);}
-          else{
-              JOptionPane.showMessageDialog(this, "NO GAME FOUND!!");
-          }
+
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
-        StartUp frame = new StartUp(mainStartUp);
-        frame.setVisible(true);
+  Saving save = new Saving();
+          save.removeALLFILEsUnfin();
+             this.setVisible(Boolean.FALSE);
+          MainStartUp.restart(); 
+              
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Continue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton continueButton;

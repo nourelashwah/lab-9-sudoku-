@@ -34,4 +34,5 @@ public class PermutationIterator implements Iterator<int[]>
         }
         return result;
     }
-}
+} 
+

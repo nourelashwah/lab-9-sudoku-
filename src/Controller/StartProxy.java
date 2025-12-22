@@ -20,13 +20,14 @@ public class StartProxy implements StartStrategy {
         this.catalog = catalog;
         this.control = control;
         this.startup = startup;
+        this.control.SetCatalog(catalog);
     }
 
     @Override
     public void start() {
-        if (catalog.isCurrent()) {
+        if (catalog.hasUnfinishedGame()) {
             realStart = new ContinueGame(startup);
-        } else if (catalog.isAllModesExist()) {
+        } else if (catalog.hasAllDifficulties()) {
             realStart = new StartNewGame(startup);
         } else {
             realStart = new SolutionFinder(control);   //bnb3t control 3shan haga kda, MHTAGEN N CHECK!!!!

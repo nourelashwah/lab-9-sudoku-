@@ -18,20 +18,31 @@ public class Game {
 
     private int[][] board;      
     private boolean completed;
-    private final String difficulty;
+    private  String difficulty;
 private  List<int[]>  editable;
-    public Game(int[][] board, String difficulty,List<int[]>  editable) {
-        this.board = copyBoard(board);  
-        this.difficulty = difficulty;
+    public Game(int[][] board) {
+        this.board = board; 
         this.completed = false;
-        this.editable = editable;
+    
+    }
+    
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     public int[][] getBoard() { 
         return board; 
     }
+    
+    public void setEditable(List<int[]> edit)
+    {
+        this.editable = edit;
+    }
 public void editcell(int row,int col,int updatedValue) throws IllegalArgumentException{
-if(!editable.contains(new int []{row , col})){
+    
+if(editable.contains(new int []{row , col})){
+
 throw new IllegalArgumentException("NOT EDITABLE");
 }
 else{
@@ -44,9 +55,9 @@ board[row][col] = updatedValue;
 }
 }
 }
-    public void setBoard(int[][] grid) { 
-        this.board = copyBoard(grid); 
-    }
+//    public void setBoard(int[][] grid) { 
+//        this.board = this.board; 
+//    }
 
     public boolean isCompleted() { 
         return completed; 
@@ -66,15 +77,16 @@ board[row][col] = updatedValue;
     
     
 
-    private int[][] copyBoard(int[][] original) {
-    int[][] copy = new int[9][9];
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            copy[i][j] = original[i][j];
-        }
-    }
-    return copy;
-    }
+//    private int[][] copyBoard(int[][] original) {
+//    int[][] copy = new int[9][9];
+//    for (int i = 0; i < 9; i++) {
+//        for (int j = 0; j < 9; j++) {
+//            copy[i][j] = original[i][j];
+//        }
+//    }
+//    return copy;
+//    }
+    //mesh 3yzenha sooo...
 
     
 }

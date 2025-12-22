@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import java.util.ArrayList;
@@ -27,69 +23,85 @@ public class ThreadManger implements Subject{
     @Override
     public void add (Observer observer)
     {
-    observers.add(observer);
+        observers.add(observer);
     }
     @Override
     public void notify(int [][] solvedBoard)
     {
+        if(done){return;}
         done=true;
         solution=solvedBoard;
+        System.out.println("ThreadManger received solution and notifying observers...");
         for(int i=0;i<observers.size();i++)
         {
-        Observer observ=observers.get(i);
-        observ.update(solvedBoard);
+            Observer observ=observers.get(i);
+            observ.update(solvedBoard);
         }
         
         for(int i=0;i<threads.size();i++)
         {
-        Thread t=threads.get(i);
-        if(t.isAlive())
-        {
-            t.interrupt();
+            Thread t=threads.get(i);
+            if(t.isAlive())
+            {
+                t.interrupt();
         
-        }
+            }
         }
     }
-    public boolean isSolutionFound(){
+
+    public boolean isSolutionFound() {
     return done;
     }
     public int [][] solve() throws InvalidGame
     {
-        
-        int parts=(9*9*9*9*9)/threadNumber;//n2sm el total number of perm on the threads
+        long total = 1;
+        for(int  i = 0 ; i < 5;i++){total*=9;}
+        long parts=total/threadNumber;//n2sm el total number of perm on the threads
         for(int i=0;i<threadNumber;i++)
         {
-            int start=i*parts;
-            int end=start+parts-1;
+            long start=i*parts;
+            long end=start+parts-1;
             if(i==threadNumber-1)
             {
-            end=9*9*9*9*9-1;
+                end=total-1;
             }
+            System.out.println("Starting Thread " + i + " range: " + start + " to " + end);
             ThreadSolver tSolver= new ThreadSolver(start, end, board, empty, this);
             Thread t=new Thread(tSolver);
             threads.add(t);
             t.start();
             
         }
-          boolean allFinished = false;
-        while (!done && !allFinished) {
-            allFinished = true;
-            for (int i = 0; i < threads.size(); i++) {
-                if (threads.get(i).isAlive()) {
-                    allFinished = false;
-                    break;
-                }
-            }
+        boolean allFinished = false;
+//        while (!done && !allFinished) {
+//            for (int i = 0; i < threads.size(); i++) {
+//                
+//                if (threads.get(i).isAlive()) {
+//                    allFinished = false;
+//                    break;
+//                }
+//            }
+//                  allFinished = true;     
+
+//            try {
+//                Thread.sleep(1);
+//            } catch (InterruptedException ignored) {
+//            
+//            ignored.printStackTrace();}
+//        }
+        if (!done) {
             try {
-                Thread.sleep(1);
-            } catch (InterruptedException ignored) {}
+                for(Thread t : threads) t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
         if (!done) {
             throw new InvalidGame("no solution found");
         }
          
-    
-     return solution;
+        return solution;
     }
             
 }

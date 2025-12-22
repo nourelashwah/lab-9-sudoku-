@@ -3,15 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import Controller.Control;
 import Controller.Handler;
+import Controller.MainStartUp;
 
 import Model.Game;
 import Model.InvalidGame;
+import Model.Load;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Model.DifficultyEnum;
+import Model.Saving;
 
 
 /**
@@ -26,19 +29,29 @@ public class CurrentGame extends javax.swing.JFrame {
 
     private Game game;
     private Handler handler;
-
+private Control c ;
    
     
-    public CurrentGame(Game game, Continue parentFrame) {
+    public CurrentGame(Game game, java.awt.Frame parentFrame) {
         
         initComponents();
+        
+          undoBUTTON.setEnabled(false);
+             solveBUTTON.setEnabled(false);
         this.game=game;
+      
+        game.setDifficulty("incomplete");
+        handler = new Handler();
+        c= new Control(handler.getCatalog(),new Load() );
+        c.setGame(game);
+        handler.setControl(c);
+        
         loadtable();
+     
+        
     }
 
-    private CurrentGame() {
-       //mo2ktan 3shan el error bs
-    }
+    
 class sudokuTable extends javax.swing.table.DefaultTableModel{
     private final List<int []>edit;
 
@@ -56,12 +69,12 @@ class sudokuTable extends javax.swing.table.DefaultTableModel{
             return true;
             }
             }
-            return false; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            return false; 
         }
 
         @Override
         public Class<?> getColumnClass(int columnIndex) {
-            return Integer.class; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            return Integer.class; 
         }
         
 
@@ -86,6 +99,10 @@ String[] cols = {"", "", "", "", "", "", "", "", ""};
 matrixGame.setModel(
 new sudokuTable(game.getEditable(),data, cols)
     );
+matrixGame.setRowHeight(30);
+for (int i = 0; i < matrixGame.getColumnCount(); i++) {
+    matrixGame.getColumnModel().getColumn(i).setPreferredWidth(30);
+}
 
 matrixGame.getModel().addTableModelListener(l -> {
 int r = l.getFirstRow();
@@ -100,11 +117,38 @@ else
     newVal=(int)val;
 try{
  game.editcell(r, c, newVal);
+ this.c.setGame(game);
+ this.handler.setControl(this.c);
+ 
+ 
 action="("+r+", "+c+", "+newVal+", "+old+")";
 handler.logUserAction(action);
+ if(handler.isUndoEmpty()) {  
+        undoBUTTON.setEnabled(false);
+    } else {
+        undoBUTTON.setEnabled(true);
+    }
+ int places = 0;
+ places = numberOfEmptySpaces();
+ if(places == 5)
+        {
+            solveBUTTON.setEnabled(true);
+            
+        }
+        else{
+     solveBUTTON.setEnabled(false);
+ }
+ Saving  save = new Saving();
+ save.SavingToFolder(game);
+//    Saving s = new Saving();
+//    s.SavingToFolder(game);
+
+
 }
 catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an interface el viewable by throw el exception
-    JOptionPane.showMessageDialog(this, "INVALID VALUE ENTERED/ENTERED DATA IN UNEDITABLE BLOCK", "ERROR",ERROR);
+//    JOptionPane.showMessageDialog(this, "INVALID VALUE ENTERED/ENTERED DATA IN UNEDITABLE BLOCK");
+e.printStackTrace();
+JOptionPane.showMessageDialog(this, "Error!");
 }
 });
 }
@@ -235,21 +279,35 @@ catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an i
     }//GEN-END:initComponents
 
     private void validateBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateBUTTONActionPerformed
-       /* int[][] board = game.getBoard();
-        boolean[][] result = control.verifyGame(board);
-        
+      int[][] board = game.getBoard();
+        boolean[][] result = c.verifyGame(board);
+        boolean val = false;
         for(int i = 0 ; i < 9 ; i++)
         {
             for(int j = 0 ; j < 9 ; j ++)
             {
-                if(!result[i][j])
+                if(!result[i][j] || board[i][j]==0)
                 {
                     //kda y3ne fe cell mesh sah!!
                     //neshuf ba han-handle ezay
-                    JOptionPane.showMessageDialog(this,"ERROR! AN INVALID CELL FOUND!");
+                    val = true;
+                    
                 }
             }
-        }*/
+        }
+        if(val){
+        JOptionPane.showMessageDialog(this, "ONE OR MORE CELL IS INCORRECT");
+        
+        }
+        else{
+          JOptionPane.showMessageDialog(this, "CORRECTTTTT");
+          Saving save = new Saving();
+          save.removeALLFILEsUnfin();
+           this.setVisible(Boolean.FALSE);
+            MainStartUp.restart(); 
+                
+          
+        }
 
     }//GEN-LAST:event_validateBUTTONActionPerformed
 
@@ -272,8 +330,17 @@ catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an i
     }
     private void solveBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBUTTONActionPerformed
        
+        int empty = numberOfEmptySpaces();
+        if(empty == 5) {
+             solveBUTTON.setEnabled(true);
+         } else {
+             solveBUTTON.setEnabled(false);
+        }
+
+       
       int[]solve =null;
       try {
+          
        solve = handler.solveGame(this.game); 
       }
       catch (InvalidGame e){
@@ -322,37 +389,37 @@ catch(IllegalArgumentException | IOException e){    //btcatch ioexception 34an i
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CurrentGame().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CurrentGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CurrentGame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton jRadioButton1;

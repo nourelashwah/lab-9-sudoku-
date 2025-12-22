@@ -15,16 +15,31 @@ public  class MainStartUp {
     private Catalog catalog;
     private Control control;
     
-    public MainStartUp(Catalog catalog, Control control) {
-        this.catalog = catalog;
-        this.control = control;
+    private Load l ;
+        boolean current;
+        boolean allModesExsist;
+    
+    public static void main(String[] args)
+    {   MainStartUp app = new MainStartUp();
+        app.start();
     }
-
+    
+    public MainStartUp() {
+        catalog = new Catalog(current, allModesExsist);
+        control = new Control(catalog,l);
+    }
+        
+       
+    
     public void start() {
         
         StartStrategy start = new StartProxy(catalog, control, this);  //MTAGEN NESHUF HWAR EL CONTROL DA!!
         start.start();
         
+    }
+    public static void restart(){
+       MainStartUp app = new MainStartUp();
+        app.start();
     }
     
 

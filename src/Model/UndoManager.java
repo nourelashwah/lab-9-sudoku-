@@ -20,12 +20,36 @@ import java.util.Stack;
 public class UndoManager {
     private Stack<UserAction> actions;
     private Game game;
-    private final File log=new File("./Levels/unfinished/log.txt");
+    private final File log=new File("./Levels/incomplete/log.txt");
 
     public UndoManager(Game game) {
         this.game = game;
-        this.actions=new Stack<>();
+        this.actions=stackload();
     }
+    private Stack<UserAction> stackload(){
+    if(!log.isFile()){
+        try{
+    log.createNewFile();}catch(Exception e){e.printStackTrace();}
+    return new Stack<>();
+    }
+    Stack<UserAction> temp = new Stack<>();
+    try(BufferedReader read = new BufferedReader(new FileReader(log.getAbsolutePath()))){
+    
+    String line;
+        while ((line =read.readLine())!=null) {
+         String subString=   line.substring(1, line.length() -1);
+         String [] s = subString.split(",");
+         temp.addFirst(new UserAction(Integer.parseInt(s[0].trim() ),Integer.parseInt(s[1].trim()),Integer.parseInt(s[2].trim()),Integer.parseInt(s[3].trim())));
+            
+        }
+    }catch(Exception e){
+    e.printStackTrace();
+    }
+    return temp;
+    
+    
+    
+    }    
     public void addAction(UserAction action){
         actions.push(action);
     }
@@ -38,7 +62,7 @@ public class UndoManager {
             int r=last.getX();
             int c=last.getY();
             int prev=last.getPrev();
-            game.getBoard()[r][c]=prev;
+            game.editcell(r, c, prev);
             ArrayList<String> lines=new ArrayList<>();
             try(BufferedReader br=new BufferedReader(new FileReader(log))){
                 String line;

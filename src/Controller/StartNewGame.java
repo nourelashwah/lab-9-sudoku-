@@ -20,7 +20,7 @@ public class StartNewGame implements StartStrategy {
     
     @Override
     public void start(){
-        StartUp frame = new StartUp(main);
+        StartUp frame = new StartUp();
         frame.setVisible(true);
     }
 }

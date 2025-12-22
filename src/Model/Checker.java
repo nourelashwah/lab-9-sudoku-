@@ -14,7 +14,6 @@ import java.util.List;
 public abstract class Checker {
     
     private int [][] board;
-    private List<String> errors =new ArrayList<>();
 
     public Checker() {
         board = SingletonBoard.getInstance().getBoard();
@@ -25,14 +24,7 @@ public abstract class Checker {
 //        return board;
 //    }
 
-
-    public List<String> getErrors() {
-        return errors;
-    }
     public abstract boolean[][] check(int[][] sudoku);
-    protected void addError(String message)
-    {
-    errors.add(message);
-    }
+   
     
 }
